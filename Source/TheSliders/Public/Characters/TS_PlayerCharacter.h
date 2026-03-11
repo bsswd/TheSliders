@@ -16,6 +16,9 @@ class THESLIDERS_API ATS_PlayerCharacter : public ATS_BaseCharacter
 
 public:
 	ATS_PlayerCharacter();
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	virtual void PossessedBy(AController* EventController) override;
+	virtual void OnRep_PlayerState() override;
 	
 private:
 	UPROPERTY(VisibleAnywhere, Category = "TS|Camera")
@@ -23,5 +26,4 @@ private:
 	
 	UPROPERTY(VisibleAnywhere, Category = "TS|Camera")
 	TObjectPtr<class UCameraComponent> SideCamera;
-
 };

@@ -10,4 +10,7 @@ ATS_BaseCharacter::ATS_BaseCharacter()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
-
+UAbilitySystemComponent* ATS_BaseCharacter::GetAbilitySystemComponent() const
+{
+	return nullptr;
+}

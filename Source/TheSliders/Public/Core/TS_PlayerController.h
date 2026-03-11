@@ -22,14 +22,40 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "TS|Input")
 	TArray<TObjectPtr<UInputMappingContext>> InputMappingContexts;
 	
-	UPROPERTY(EditDefaultsOnly, Category = "TS|Input")
+	UPROPERTY(EditDefaultsOnly, Category = "TS|Input|Movement")
 	TObjectPtr<UInputAction> MoveAction;
 	
-	UPROPERTY(EditDefaultsOnly, Category = "TS|Input")
+	UPROPERTY(EditDefaultsOnly, Category = "TS|Input|Movement")
 	TObjectPtr<UInputAction> JumpAction;
 	
+	UPROPERTY(EditDefaultsOnly, Category = "TS|Input|Movement")
+	TObjectPtr<UInputAction> AttackAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "TS|Input|Selectors")
+	TObjectPtr<UInputAction> SelectDocAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "TS|Input|Selectors")
+	TObjectPtr<UInputAction> SelectBaldAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "TS|Input|Selectors")
+	TObjectPtr<UInputAction> SelectLawAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "TS|Input|Selectors")
+	TObjectPtr<UInputAction> SelectSazzAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "TS|Input|Selectors")
+	TObjectPtr<UInputAction> SelectJokaAction;
 	
 	void Move(const FInputActionValue& Value);
+	
 	void Jump();
 	void StopJumping();
+	
+	void Attack();
+	
+	void SelectDoc();
+	void SelectBald();
+	void SelectLaw();
+	void SelectSazz();
+	void SelectJoka();
 };
