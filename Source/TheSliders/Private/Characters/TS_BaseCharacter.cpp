@@ -2,15 +2,62 @@
 
 
 #include "TheSliders/Public/Characters/TS_BaseCharacter.h"
+#include "PaperFlipbookComponent.h"
 
 
-// Sets default values
 ATS_BaseCharacter::ATS_BaseCharacter()
 {
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = false;	
+	CurrentFlipbook = nullptr;
 }
 
 UAbilitySystemComponent* ATS_BaseCharacter::GetAbilitySystemComponent() const
 {
 	return nullptr;
+}
+
+void ATS_BaseCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	GetWorldTimerManager().SetTimer(
+		AnimationTimerHandle,
+		this,
+		&ATS_BaseCharacter::CheckAndUpdateAnimation,
+		AnimationCheckInterval,
+		true
+	);
+}
+
+void ATS_BaseCharacter::CheckAndUpdateAnimation()
+{
+	float Speed = GetVelocity().Size();
+	
+	if (!FMath::IsNearlyEqual(Speed, LastSpeed, 0.1f))
+	{
+		UPaperFlipbook* DesiredFlipbook = (Speed > RunSpeedThreshold) ? RunFlipbook : IdleFlipbook;
+ 
+		if (DesiredFlipbook && DesiredFlipbook != CurrentFlipbook)
+		{
+			GetSprite()->SetFlipbook(DesiredFlipbook);
+			CurrentFlipbook = DesiredFlipbook;
+		}
+ 
+		LastSpeed = Speed;
+	}
+	
+	if (GetVelocity().X < 0.f)
+	{
+		GetSprite()->SetRelativeRotation(FRotator(0.f, -180.f, 0.f));
+	}
+	else
+	{
+		GetSprite()->SetRelativeRotation(FRotator(0.f, 0.f, 0.f));
+	}
+}
+
+void ATS_BaseCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+	GetWorldTimerManager().ClearTimer(AnimationTimerHandle);
 }
