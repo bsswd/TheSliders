@@ -7,6 +7,7 @@
 #include "PaperCharacter.h"
 #include "TS_BaseCharacter.generated.h"
 
+class UGameplayAbility;
 class UPaperFlipbook;
 
 UCLASS(Abstract)
@@ -35,8 +36,14 @@ protected:
 	UPROPERTY(EditAnywhere, Category="TS|Animation")
 	float RunSpeedThreshold = 1.0f;
 	
+	
+	void GiveStartupAbilities();
+	
 private:
 
+	UPROPERTY(EditDefaultsOnly, Category = "TS|Abilities")
+	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
+	
 	UPROPERTY()
 	UPaperFlipbook* CurrentFlipbook;
 	

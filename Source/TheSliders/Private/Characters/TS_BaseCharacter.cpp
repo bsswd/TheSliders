@@ -2,7 +2,9 @@
 
 
 #include "TheSliders/Public/Characters/TS_BaseCharacter.h"
+#include "GameplayAbilitySpec.h"
 #include "PaperFlipbookComponent.h"
+#include "AbilitySystemComponent.h"
 
 
 ATS_BaseCharacter::ATS_BaseCharacter()
@@ -60,4 +62,13 @@ void ATS_BaseCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	Super::EndPlay(EndPlayReason);
 	GetWorldTimerManager().ClearTimer(AnimationTimerHandle);
+}
+
+void ATS_BaseCharacter::GiveStartupAbilities()
+{
+	for (const auto& Ability : StartupAbilities)
+	{
+		FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(Ability);
+		GetAbilitySystemComponent()->GiveAbility(AbilitySpec);
+	}
 }
