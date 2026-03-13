@@ -53,9 +53,10 @@ void ATS_PlayerCharacter::PossessedBy(AController* EventController)
 {
 	Super::PossessedBy(EventController);
 	
-	if (!IsValid(GetAbilitySystemComponent())) return;
+	if (!IsValid(GetAbilitySystemComponent()) || !HasAuthority()) return;
 	
 	GetAbilitySystemComponent()->InitAbilityActorInfo(GetPlayerState(), this);
+	GiveStartupAbilities();
 }
 
 void ATS_PlayerCharacter::OnRep_PlayerState()

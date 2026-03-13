@@ -13,11 +13,6 @@ ATS_BaseCharacter::ATS_BaseCharacter()
 	CurrentFlipbook = nullptr;
 }
 
-UAbilitySystemComponent* ATS_BaseCharacter::GetAbilitySystemComponent() const
-{
-	return nullptr;
-}
-
 void ATS_BaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
@@ -58,17 +53,24 @@ void ATS_BaseCharacter::CheckAndUpdateAnimation()
 	}
 }
 
-void ATS_BaseCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
+UAbilitySystemComponent* ATS_BaseCharacter::GetAbilitySystemComponent() const
 {
-	Super::EndPlay(EndPlayReason);
-	GetWorldTimerManager().ClearTimer(AnimationTimerHandle);
+	return nullptr;
 }
 
 void ATS_BaseCharacter::GiveStartupAbilities()
 {
+	if (!IsValid(GetAbilitySystemComponent())) return;
+	
 	for (const auto& Ability : StartupAbilities)
 	{
 		FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(Ability);
 		GetAbilitySystemComponent()->GiveAbility(AbilitySpec);
 	}
+}
+
+void ATS_BaseCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+	GetWorldTimerManager().ClearTimer(AnimationTimerHandle);
 }
