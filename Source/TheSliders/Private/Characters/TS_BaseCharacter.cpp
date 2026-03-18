@@ -5,6 +5,7 @@
 #include "GameplayAbilitySpec.h"
 #include "PaperFlipbookComponent.h"
 #include "AbilitySystemComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 
 ATS_BaseCharacter::ATS_BaseCharacter()
@@ -38,6 +39,15 @@ void ATS_BaseCharacter::CheckAndUpdateAnimation()
 		{
 			GetSprite()->SetFlipbook(DesiredFlipbook);
 			CurrentFlipbook = DesiredFlipbook;
+		}
+		
+		if (GetCharacterMovement()->IsFalling())
+		{
+			GetSprite()->SetFlipbook(JumpFlipbook);
+		}
+		else
+		{
+			GetSprite()->SetFlipbook(DesiredFlipbook);
 		}
  
 		LastSpeed = Speed;

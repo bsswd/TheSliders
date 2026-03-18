@@ -30,12 +30,14 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TS|Flipbooks")
 	TObjectPtr<UPaperFlipbook> RunFlipbook;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TS|Flipbooks")
+	TObjectPtr<UPaperFlipbook> JumpFlipbook;
+	
 	UPROPERTY(EditAnywhere, Category="TS|Animation")
 	float AnimationCheckInterval = 0.1f;
  
 	UPROPERTY(EditAnywhere, Category="TS|Animation")
 	float RunSpeedThreshold = 1.0f;
-	
 	
 	void GiveStartupAbilities();
 	
