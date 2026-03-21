@@ -53,13 +53,15 @@ void ATS_BaseCharacter::CheckAndUpdateAnimation()
 		LastSpeed = Speed;
 	}
 	
-	if (GetVelocity().X < 0.f)
-	{
-		GetSprite()->SetRelativeRotation(FRotator(0.f, -180.f, 0.f));
-	}
-	else
+	if (GetVelocity().X > KINDA_SMALL_NUMBER && !bIsFacingRight)
 	{
 		GetSprite()->SetRelativeRotation(FRotator(0.f, 0.f, 0.f));
+		bIsFacingRight = true;
+	}
+	else if (GetVelocity().X < -KINDA_SMALL_NUMBER && bIsFacingRight)
+	{
+		GetSprite()->SetRelativeRotation(FRotator(0.f, -180.f, 0.f));
+		bIsFacingRight = false;
 	}
 }
 

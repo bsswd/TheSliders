@@ -50,6 +50,8 @@ private:
 	UPaperFlipbook* CurrentFlipbook;
 	
 	FTimerHandle AnimationTimerHandle;
+	
+	bool bIsFacingRight = true;
  
 	float LastSpeed = 0.f;
 	

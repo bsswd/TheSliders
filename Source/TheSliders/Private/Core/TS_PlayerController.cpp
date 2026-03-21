@@ -2,9 +2,12 @@
 
 
 #include "Core/TS_PlayerController.h"
+#include "AbilitySystemBlueprintLibrary.h"
+#include "AbilitySystemComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "GameFramework/Character.h"
+#include "GameplayTags/TSTags.h"
 
 void ATS_PlayerController::SetupInputComponent()
 {
@@ -58,9 +61,19 @@ void ATS_PlayerController::StopJumping()
 	}
 }
 
+void ATS_PlayerController::ActivateAbility(const FGameplayTag& AbilityTag) const
+{
+	UAbilitySystemComponent* ASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetPawn());
+	if (!IsValid(ASC)) return;
+	
+	ASC->TryActivateAbilitiesByTag(AbilityTag.GetSingleTagContainer());	
+}
+
 void ATS_PlayerController::Attack()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Attack!"))
+	// Need to check what character is active, because different types of attacks
+	
+	ActivateAbility(TSTags::TSAbilities::Player::MeleeAttack);
 }
 
 void ATS_PlayerController::SelectDoc()

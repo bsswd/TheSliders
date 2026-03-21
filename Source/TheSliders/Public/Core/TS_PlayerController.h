@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "TS_PlayerController.generated.h"
 
+struct FGameplayTag;
 struct FInputActionValue;
 class UInputMappingContext;
 class UInputAction;
@@ -50,6 +51,8 @@ private:
 	
 	void Jump();
 	void StopJumping();
+	
+	void ActivateAbility(const FGameplayTag& AbilityTag) const;
 	
 	void Attack();
 	
