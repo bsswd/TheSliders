@@ -78,25 +78,25 @@ void ATS_PlayerController::Attack()
 
 void ATS_PlayerController::SelectDoc()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Doc selected"))
+	ActivateAbility(TSTags::TSAbilities::Player::DocSelect);
 }
 
 void ATS_PlayerController::SelectBald()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Bald selected"))
+	ActivateAbility(TSTags::TSAbilities::Player::BaldSelect);
 }
 
 void ATS_PlayerController::SelectLaw()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Law selected"))
+	ActivateAbility(TSTags::TSAbilities::Player::LawSelect);
 }
 
 void ATS_PlayerController::SelectSazz()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Sazz selected"))
+	ActivateAbility(TSTags::TSAbilities::Player::SazzSelect);
 }
 
 void ATS_PlayerController::SelectJoka()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Joka selected"))
+	ActivateAbility(TSTags::TSAbilities::Player::JokaSelect);
 }
