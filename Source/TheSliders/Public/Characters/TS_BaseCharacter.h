@@ -33,6 +33,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TS|Flipbooks")
 	TObjectPtr<UPaperFlipbook> JumpFlipbook;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TS|Flipbooks")
+	TObjectPtr<UPaperFlipbook> AttackFlipbook;
+	
 	UPROPERTY(EditAnywhere, Category="TS|Animation")
 	float AnimationCheckInterval = 0.1f;
  
