@@ -11,8 +11,9 @@
 ATS_BaseCharacter::ATS_BaseCharacter()
 {
 	PrimaryActorTick.bCanEverTick = false;	
-	CurrentFlipbook = nullptr;
 }
+
+/** BeginPlay and EndPlay **/
 
 void ATS_BaseCharacter::BeginPlay()
 {
@@ -21,19 +22,27 @@ void ATS_BaseCharacter::BeginPlay()
 	GetWorldTimerManager().SetTimer(
 		AnimationTimerHandle,
 		this,
-		&ATS_BaseCharacter::CheckAndUpdateAnimation,
+		&ATS_BaseCharacter::CheckAndUpdateMovementAnimation,
 		AnimationCheckInterval,
 		true
 	);
 }
 
-void ATS_BaseCharacter::CheckAndUpdateAnimation()
+void ATS_BaseCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+	GetWorldTimerManager().ClearTimer(AnimationTimerHandle);
+}
+
+/** Movement animation **/ 
+
+void ATS_BaseCharacter::CheckAndUpdateMovementAnimation()
 {
 	float Speed = GetVelocity().Size();
 	
 	if (!FMath::IsNearlyEqual(Speed, LastSpeed, 0.1f))
 	{
-		UPaperFlipbook* DesiredFlipbook = (Speed > RunSpeedThreshold) ? RunFlipbook : IdleFlipbook;
+		TObjectPtr<UPaperFlipbook>  DesiredFlipbook = (Speed > RunSpeedThreshold) ? RunFlipbook : IdleFlipbook;
  
 		if (DesiredFlipbook && DesiredFlipbook != CurrentFlipbook)
 		{
@@ -43,10 +52,12 @@ void ATS_BaseCharacter::CheckAndUpdateAnimation()
 		
 		if (GetCharacterMovement()->IsFalling())
 		{
+			bCanAttack = false;
 			GetSprite()->SetFlipbook(JumpFlipbook);
 		}
 		else
 		{
+			bCanAttack = true;
 			GetSprite()->SetFlipbook(DesiredFlipbook);
 		}
  
@@ -65,6 +76,30 @@ void ATS_BaseCharacter::CheckAndUpdateAnimation()
 	}
 }
 
+/** Attack animation **/
+
+void ATS_BaseCharacter::PlayAttackAnimation()
+{
+	if (AttackFlipbook && bCanAttack)
+	{
+		SetFlipbookIfDifferent(AttackFlipbook);		
+	}
+}
+
+void ATS_BaseCharacter::SetFlipbookIfDifferent(TObjectPtr<UPaperFlipbook> NewFlipbook) const
+{
+	UPaperFlipbookComponent* CurrentSprite = GetSprite();
+	if (CurrentSprite && NewFlipbook && CurrentSprite->GetFlipbook() != NewFlipbook)
+	{
+		CurrentSprite->SetFlipbook(NewFlipbook);
+		CurrentSprite->PlayFromStart();
+		
+		
+	}
+}
+
+/** Ability system **/
+
 UAbilitySystemComponent* ATS_BaseCharacter::GetAbilitySystemComponent() const
 {
 	return nullptr;
@@ -79,10 +114,4 @@ void ATS_BaseCharacter::GiveStartupAbilities()
 		FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(Ability);
 		GetAbilitySystemComponent()->GiveAbility(AbilitySpec);
 	}
-}
-
-void ATS_BaseCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
-{
-	Super::EndPlay(EndPlayReason);
-	GetWorldTimerManager().ClearTimer(AnimationTimerHandle);
 }

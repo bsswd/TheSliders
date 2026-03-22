@@ -16,14 +16,19 @@ class THESLIDERS_API ATS_BaseCharacter : public APaperCharacter, public IAbility
 	GENERATED_BODY()
 
 public:
+	
 	ATS_BaseCharacter();
+	
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	
+	virtual void PlayAttackAnimation();
 	
 protected:
 	
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
+	/** Flipbooks **/
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TS|Flipbooks")
 	TObjectPtr<UPaperFlipbook> IdleFlipbook;
 	
@@ -36,12 +41,14 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TS|Flipbooks")
 	TObjectPtr<UPaperFlipbook> AttackFlipbook;
 	
+	/** Animation setup **/
 	UPROPERTY(EditAnywhere, Category="TS|Animation")
 	float AnimationCheckInterval = 0.1f;
  
 	UPROPERTY(EditAnywhere, Category="TS|Animation")
 	float RunSpeedThreshold = 1.0f;
 	
+	/** Ability system **/
 	void GiveStartupAbilities();
 	
 private:
@@ -50,13 +57,15 @@ private:
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 	
 	UPROPERTY()
-	UPaperFlipbook* CurrentFlipbook;
+	TObjectPtr<UPaperFlipbook>  CurrentFlipbook = nullptr;
 	
 	FTimerHandle AnimationTimerHandle;
-	
-	bool bIsFacingRight = true;
- 
 	float LastSpeed = 0.f;
 	
-	void CheckAndUpdateAnimation();	
+	bool bIsFacingRight = true;
+	bool bCanAttack = false;
+	
+	
+	void CheckAndUpdateMovementAnimation();	
+	void SetFlipbookIfDifferent(TObjectPtr<UPaperFlipbook> NewFlipbook) const;
 };

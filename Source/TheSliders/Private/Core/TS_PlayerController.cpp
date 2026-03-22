@@ -6,8 +6,15 @@
 #include "AbilitySystemComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Characters/TS_PlayerCharacter.h"
 #include "GameFramework/Character.h"
 #include "GameplayTags/TSTags.h"
+
+ATS_BaseCharacter* ATS_PlayerController::GetBaseCharacter() const
+{
+	APawn* CharacterPawn = GetPawn();	
+	return Cast<ATS_BaseCharacter>(CharacterPawn);	
+}
 
 void ATS_PlayerController::SetupInputComponent()
 {
@@ -74,6 +81,7 @@ void ATS_PlayerController::Attack()
 	// Need to check what character is active, because different types of attacks
 	
 	ActivateAbility(TSTags::TSAbilities::Player::MeleeAttack);
+	GetBaseCharacter()->PlayAttackAnimation();
 }
 
 void ATS_PlayerController::SelectDoc()
