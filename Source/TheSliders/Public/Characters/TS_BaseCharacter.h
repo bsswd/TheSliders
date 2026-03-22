@@ -64,10 +64,6 @@ private:
 	
 	bool bIsFacingRight = true;
 	bool bIsAttacking = false;
-	
-	
-	UFUNCTION()
-	void OnAttackAnimationFinished();	
-	
+		
 	void CheckAndUpdateMovementAnimation();	
 };
