@@ -38,6 +38,8 @@ void ATS_BaseCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 void ATS_BaseCharacter::CheckAndUpdateMovementAnimation()
 {
+	if (bIsAttacking) return;
+	
 	float Speed = GetVelocity().Size();
 	
 	if (!FMath::IsNearlyEqual(Speed, LastSpeed, 0.1f))
@@ -52,12 +54,12 @@ void ATS_BaseCharacter::CheckAndUpdateMovementAnimation()
 		
 		if (GetCharacterMovement()->IsFalling())
 		{
-			bCanAttack = false;
+			
 			GetSprite()->SetFlipbook(JumpFlipbook);
 		}
 		else
 		{
-			bCanAttack = true;
+			
 			GetSprite()->SetFlipbook(DesiredFlipbook);
 		}
  
@@ -80,22 +82,29 @@ void ATS_BaseCharacter::CheckAndUpdateMovementAnimation()
 
 void ATS_BaseCharacter::PlayAttackAnimation()
 {
-	if (AttackFlipbook && bCanAttack)
-	{
-		SetFlipbookIfDifferent(AttackFlipbook);		
-	}
+	if (bIsAttacking || !AttackFlipbook) return;
+ 
+	bIsAttacking = true;
+ 
+	GetSprite()->SetFlipbook(AttackFlipbook);
+	GetSprite()->SetLooping(false);
+	GetSprite()->PlayFromStart();
+ 
+	GetSprite()->OnFinishedPlaying.AddDynamic(this, &ATS_BaseCharacter::OnAttackAnimationFinished);
 }
 
-void ATS_BaseCharacter::SetFlipbookIfDifferent(TObjectPtr<UPaperFlipbook> NewFlipbook) const
+void ATS_BaseCharacter::OnAttackAnimationFinished()
 {
-	UPaperFlipbookComponent* CurrentSprite = GetSprite();
-	if (CurrentSprite && NewFlipbook && CurrentSprite->GetFlipbook() != NewFlipbook)
-	{
-		CurrentSprite->SetFlipbook(NewFlipbook);
-		CurrentSprite->PlayFromStart();
-		
-		
-	}
+	UE_LOG(LogTemp, Warning, TEXT("Attack animation finished"))
+	
+	
+	
+	GetSprite()->SetFlipbook(IdleFlipbook);
+	GetSprite()->SetLooping(true);
+	
+	bIsAttacking = false;
+	
+	GetSprite()->OnFinishedPlaying.RemoveDynamic(this, &ATS_BaseCharacter::OnAttackAnimationFinished);	
 }
 
 /** Ability system **/

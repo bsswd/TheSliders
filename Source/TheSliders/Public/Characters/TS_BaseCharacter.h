@@ -63,9 +63,11 @@ private:
 	float LastSpeed = 0.f;
 	
 	bool bIsFacingRight = true;
-	bool bCanAttack = false;
+	bool bIsAttacking = false;
 	
+	
+	UFUNCTION()
+	void OnAttackAnimationFinished();	
 	
 	void CheckAndUpdateMovementAnimation();	
-	void SetFlipbookIfDifferent(TObjectPtr<UPaperFlipbook> NewFlipbook) const;
 };
