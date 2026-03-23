@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "TS_PlayerController.generated.h"
 
+class ATS_PlayerCharacter;
 class ATS_BaseCharacter;
 struct FGameplayTag;
 struct FInputActionValue;
@@ -19,6 +20,7 @@ class THESLIDERS_API ATS_PlayerController : public APlayerController
 	
 public:
 	ATS_BaseCharacter* GetBaseCharacter() const; 
+	ATS_PlayerCharacter* GetPlayerCharacter() const;
 	
 protected:
 	virtual void SetupInputComponent() override;

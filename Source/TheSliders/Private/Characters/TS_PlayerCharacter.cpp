@@ -4,6 +4,7 @@
 #include "Characters/TS_PlayerCharacter.h"
 
 #include "AbilitySystemComponent.h"
+#include "PaperFlipbookComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Core/TS_PlayerState.h"
@@ -39,6 +40,7 @@ ATS_PlayerCharacter::ATS_PlayerCharacter()
 	SideCamera->SetProjectionMode(ECameraProjectionMode::Orthographic);
 	SideCamera->SetOrthoWidth(1200.f);
 	
+	AttackFrameIndex = 3;
 }
 
 UAbilitySystemComponent* ATS_PlayerCharacter::GetAbilitySystemComponent() const

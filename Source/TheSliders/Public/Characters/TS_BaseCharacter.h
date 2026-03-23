@@ -7,6 +7,7 @@
 #include "PaperCharacter.h"
 #include "TS_BaseCharacter.generated.h"
 
+class UBoxComponent;
 class UGameplayAbility;
 class UPaperFlipbook;
 
@@ -47,6 +48,12 @@ protected:
  
 	UPROPERTY(EditAnywhere, Category="TS|Animation")
 	float RunSpeedThreshold = 1.0f;
+	
+	UPROPERTY(EditAnywhere, Category="TS|Character|Attack")
+	int AttackFrameIndex;
+	
+	UPROPERTY(EditAnywhere, Category="TS|Character|Attack")
+	TObjectPtr<UBoxComponent> HitBox;
 	
 	/** Ability system **/
 	void GiveStartupAbilities();

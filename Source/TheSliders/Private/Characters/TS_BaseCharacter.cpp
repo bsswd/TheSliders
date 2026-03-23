@@ -5,12 +5,17 @@
 #include "GameplayAbilitySpec.h"
 #include "PaperFlipbookComponent.h"
 #include "AbilitySystemComponent.h"
+#include "Components/BoxComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 
 ATS_BaseCharacter::ATS_BaseCharacter()
 {
-	PrimaryActorTick.bCanEverTick = false;	
+	PrimaryActorTick.bCanEverTick = false;
+	
+	HitBox = CreateDefaultSubobject<UBoxComponent>("HitBox");
+	HitBox->SetupAttachment(RootComponent);
+	
 }
 
 /** BeginPlay and EndPlay **/

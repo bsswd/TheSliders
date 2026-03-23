@@ -16,6 +16,12 @@ ATS_BaseCharacter* ATS_PlayerController::GetBaseCharacter() const
 	return Cast<ATS_BaseCharacter>(CharacterPawn);	
 }
 
+ATS_PlayerCharacter* ATS_PlayerController::GetPlayerCharacter() const
+{
+	APawn* CharacterPawn = GetPawn();
+	return Cast<ATS_PlayerCharacter>(CharacterPawn);
+}
+
 void ATS_PlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
@@ -82,6 +88,9 @@ void ATS_PlayerController::Attack()
 	
 	ActivateAbility(TSTags::TSAbilities::Player::MeleeAttack);
 	GetBaseCharacter()->PlayAttackAnimation();
+	
+	
+	
 }
 
 void ATS_PlayerController::SelectDoc()
