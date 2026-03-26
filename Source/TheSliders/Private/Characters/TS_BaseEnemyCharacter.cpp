@@ -17,16 +17,3 @@ void ATS_BaseEnemyCharacter::BeginPlay()
 	Super::BeginPlay();
 	
 }
-
-// Called every frame
-void ATS_BaseEnemyCharacter::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-}
-
-// Called to bind functionality to input
-void ATS_BaseEnemyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-}
-

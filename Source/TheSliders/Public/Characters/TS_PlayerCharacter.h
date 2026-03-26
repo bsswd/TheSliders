@@ -15,12 +15,19 @@ class THESLIDERS_API ATS_PlayerCharacter : public ATS_BaseCharacter
 	GENERATED_BODY()
 
 public:
+
 	ATS_PlayerCharacter();
+	
+	/** FUNCTIONS **/
+	
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	virtual void PossessedBy(AController* EventController) override;
 	virtual void OnRep_PlayerState() override;
 	
 private:
+
+	/** PROPERTIES **/
+	
 	UPROPERTY(VisibleAnywhere, Category = "TS|Camera")
 	TObjectPtr<class USpringArmComponent> CameraBoom;
 	

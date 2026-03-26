@@ -6,9 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "TS_GameModeBase.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class THESLIDERS_API ATS_GameModeBase : public AGameModeBase
 {

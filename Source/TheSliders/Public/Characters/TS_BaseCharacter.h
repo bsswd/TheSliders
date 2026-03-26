@@ -11,6 +11,7 @@ class UBoxComponent;
 class UGameplayAbility;
 class UPaperFlipbook;
 
+
 UCLASS(Abstract)
 class THESLIDERS_API ATS_BaseCharacter : public APaperCharacter, public IAbilitySystemInterface
 {
@@ -20,16 +21,17 @@ public:
 	
 	ATS_BaseCharacter();
 	
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	/** FUNCTIONS **/
 	
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;	
 	virtual void PlayAttackAnimation();
 	
 protected:
-	
-	virtual void BeginPlay() override;
-	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+	/** PROPERTIES **/
 
 	/** Flipbooks **/
+	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TS|Flipbooks")
 	TObjectPtr<UPaperFlipbook> IdleFlipbook;
 	
@@ -43,6 +45,7 @@ protected:
 	TObjectPtr<UPaperFlipbook> AttackFlipbook;
 	
 	/** Animation setup **/
+	
 	UPROPERTY(EditAnywhere, Category="TS|Animation")
 	float AnimationCheckInterval = 0.1f;
  
@@ -52,13 +55,23 @@ protected:
 	UPROPERTY(EditAnywhere, Category="TS|Character|Attack")
 	int AttackFrameIndex;
 	
-	UPROPERTY(EditAnywhere, Category="TS|Character|Attack")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TS|Character|Attack")
 	TObjectPtr<UBoxComponent> HitBox;
 	
+	/** FUNCTIONS **/	
+	
 	/** Ability system **/
+	
 	void GiveStartupAbilities();
 	
+	/** Basic **/
+	
+	virtual void BeginPlay() override;
+    virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+	
 private:
+
+	/** PROPERTIES **/
 
 	UPROPERTY(EditDefaultsOnly, Category = "TS|Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
@@ -72,5 +85,7 @@ private:
 	bool bIsFacingRight = true;
 	bool bIsAttacking = false;
 		
+	/** FUNCTIONS **/
+	
 	void CheckAndUpdateMovementAnimation();	
 };

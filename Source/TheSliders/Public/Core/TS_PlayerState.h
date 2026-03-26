@@ -15,10 +15,12 @@ class THESLIDERS_API ATS_PlayerState : public APlayerState, public IAbilitySyste
 	GENERATED_BODY()
 	
 public:
+
 	ATS_PlayerState();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	
 private:
+	
 	UPROPERTY(VisibleAnywhere, Category = "TS|Abilities")
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 };

@@ -13,19 +13,27 @@ struct FInputActionValue;
 class UInputMappingContext;
 class UInputAction;
 
+
 UCLASS()
 class THESLIDERS_API ATS_PlayerController : public APlayerController
 {
 	GENERATED_BODY()
 	
 public:
+	
+	/** FUNCTIONS **/
+	
 	ATS_BaseCharacter* GetBaseCharacter() const; 
 	ATS_PlayerCharacter* GetPlayerCharacter() const;
 	
 protected:
+
 	virtual void SetupInputComponent() override;
 	
 private:
+
+	/** PROPERTIES **/
+
 	UPROPERTY(EditDefaultsOnly, Category = "TS|Input")
 	TArray<TObjectPtr<UInputMappingContext>> InputMappingContexts;
 	
@@ -53,13 +61,11 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "TS|Input|Selectors")
 	TObjectPtr<UInputAction> SelectJokaAction;
 	
-	void Move(const FInputActionValue& Value);
+	/** FUNCTIONS **/
 	
+	void Move(const FInputActionValue& Value);	
 	void Jump();
 	void StopJumping();
-	
-	void ActivateAbility(const FGameplayTag& AbilityTag) const;
-	
 	void Attack();
 	
 	void SelectDoc();
@@ -67,4 +73,6 @@ private:
 	void SelectLaw();
 	void SelectSazz();
 	void SelectJoka();
+	
+	void ActivateAbility(const FGameplayTag& AbilityTag) const;
 };

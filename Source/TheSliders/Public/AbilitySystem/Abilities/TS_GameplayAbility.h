@@ -14,6 +14,8 @@ class THESLIDERS_API UTS_GameplayAbility : public UGameplayAbility
 	
 public:
 	
+	/** PROPERTIES **/
+	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TS|Debug")
 	bool bIsDrawDebug = false;
 };
