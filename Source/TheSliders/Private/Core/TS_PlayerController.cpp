@@ -6,6 +6,7 @@
 #include "AbilitySystemComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "PaperFlipbookComponent.h"
 #include "Characters/TS_PlayerCharacter.h"
 #include "GameFramework/Character.h"
 #include "GameplayTags/TSTags.h"
@@ -88,6 +89,8 @@ void ATS_PlayerController::Attack()
 	
 	ActivateAbility(TSTags::TSAbilities::Player::MeleeAttack);
 	GetBaseCharacter()->PlayAttackAnimation();
+	
+	
 	
 	
 	

@@ -14,8 +14,7 @@ ATS_BaseCharacter::ATS_BaseCharacter()
 	PrimaryActorTick.bCanEverTick = false;
 	
 	HitBox = CreateDefaultSubobject<UBoxComponent>("HitBox");
-	HitBox->SetupAttachment(RootComponent);
-	
+	HitBox->SetupAttachment(RootComponent);	
 }
 
 /** BeginPlay and EndPlay **/
@@ -63,6 +62,7 @@ void ATS_BaseCharacter::CheckAndUpdateMovementAnimation()
 		if (GetCharacterMovement()->IsFalling())
 		{
 			GetSprite()->SetFlipbook(JumpFlipbook);
+			
 		}
 		else
 		{
@@ -75,11 +75,13 @@ void ATS_BaseCharacter::CheckAndUpdateMovementAnimation()
 	if (GetVelocity().X > KINDA_SMALL_NUMBER && !bIsFacingRight)
 	{
 		GetSprite()->SetRelativeRotation(FRotator(0.f, 0.f, 0.f));
+		HitBox->SetRelativeLocation(FVector(130.f, 0.f, 0.f));
 		bIsFacingRight = true;
 	}
 	else if (GetVelocity().X < -KINDA_SMALL_NUMBER && bIsFacingRight)
 	{
 		GetSprite()->SetRelativeRotation(FRotator(0.f, -180.f, 0.f));
+		HitBox->SetRelativeLocation(FVector(-130.f, 0.f, 0.f));
 		bIsFacingRight = false;
 	}
 }
@@ -90,7 +92,7 @@ void ATS_BaseCharacter::PlayAttackAnimation()
 {
 	if (GetVelocity().X == 0.f && GetVelocity().Z == 0.f)
 	{
-		GetSprite()->SetFlipbook(AttackFlipbook);
+		GetSprite()->SetFlipbook(AttackFlipbook);		
 	}
 }
 
