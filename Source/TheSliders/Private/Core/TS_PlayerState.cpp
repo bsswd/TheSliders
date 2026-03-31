@@ -2,14 +2,14 @@
 
 
 #include "Core/TS_PlayerState.h"
-#include "AbilitySystemComponent.h"
+#include "AbilitySystem/TS_AbilitySystemComponent.h"
 
 
 ATS_PlayerState::ATS_PlayerState()
 {
 	SetNetUpdateFrequency(100.f);
 	
-	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>("AbilitySystemComponent");
+	AbilitySystemComponent = CreateDefaultSubobject<UTS_AbilitySystemComponent>("AbilitySystemComponent");
 	AbilitySystemComponent -> SetIsReplicated(true);
 	AbilitySystemComponent -> SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
 }

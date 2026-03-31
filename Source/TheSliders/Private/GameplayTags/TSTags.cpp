@@ -8,6 +8,8 @@ namespace TSTags
 {
 	namespace TSAbilities
 	{
+		UE_DEFINE_GAMEPLAY_TAG_COMMENT(ActivateOnGiven, "TSTags.TSAbilities.ActivateOnGiven", "Tag for activate ability on given")
+		
 		namespace Player
 		{
 			UE_DEFINE_GAMEPLAY_TAG_COMMENT(MeleeAttack, "TSTags.TSAbilities.Player.MeleeAttack", "Tag for player melee attack")

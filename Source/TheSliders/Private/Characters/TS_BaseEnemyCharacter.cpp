@@ -2,18 +2,35 @@
 
 
 #include "Characters/TS_BaseEnemyCharacter.h"
+#include "AbilitySystem/TS_AbilitySystemComponent.h"
 
 
-// Sets default values
 ATS_BaseEnemyCharacter::ATS_BaseEnemyCharacter()
 {
-	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
+	
+	AbilitySystemComponent = CreateDefaultSubobject<UTS_AbilitySystemComponent>("AbilitySystemComponent");
+	AbilitySystemComponent->SetIsReplicated(true);
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
 }
 
-// Called when the game starts or when spawned
+UAbilitySystemComponent* ATS_BaseEnemyCharacter::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
 void ATS_BaseEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	if (!IsValid(GetAbilitySystemComponent())) return;
+	
+	GetAbilitySystemComponent()->InitAbilityActorInfo(this, this);
+	
+	if (!HasAuthority()) return;
+	
+	GiveStartupAbilities();
+	
+	
 	
 }

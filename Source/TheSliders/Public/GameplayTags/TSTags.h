@@ -11,6 +11,8 @@ namespace TSTags
 {
 	namespace TSAbilities
 	{
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(ActivateOnGiven);		
+		
 		namespace Player
 		{
 			UE_DECLARE_GAMEPLAY_TAG_EXTERN(MeleeAttack);
