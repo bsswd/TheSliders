@@ -87,7 +87,7 @@ void ATS_PlayerController::Attack()
 {
 	// Need to check what character is active, because different types of attacks
 	
-	ActivateAbility(TSTags::TSAbilities::Player::MeleeAttack);
+	ActivateAbility(TSTags::Abilities::Player::MeleeAttack);
 	GetBaseCharacter()->PlayAttackAnimation();
 	
 	
@@ -98,25 +98,25 @@ void ATS_PlayerController::Attack()
 
 void ATS_PlayerController::SelectDoc()
 {
-	ActivateAbility(TSTags::TSAbilities::Player::DocSelect);
+	ActivateAbility(TSTags::Abilities::Player::DocSelect);
 }
 
 void ATS_PlayerController::SelectBald()
 {
-	ActivateAbility(TSTags::TSAbilities::Player::BaldSelect);
+	ActivateAbility(TSTags::Abilities::Player::BaldSelect);
 }
 
 void ATS_PlayerController::SelectLaw()
 {
-	ActivateAbility(TSTags::TSAbilities::Player::LawSelect);
+	ActivateAbility(TSTags::Abilities::Player::LawSelect);
 }
 
 void ATS_PlayerController::SelectSazz()
 {
-	ActivateAbility(TSTags::TSAbilities::Player::SazzSelect);
+	ActivateAbility(TSTags::Abilities::Player::SazzSelect);
 }
 
 void ATS_PlayerController::SelectJoka()
 {
-	ActivateAbility(TSTags::TSAbilities::Player::JokaSelect);
+	ActivateAbility(TSTags::Abilities::Player::JokaSelect);
 }

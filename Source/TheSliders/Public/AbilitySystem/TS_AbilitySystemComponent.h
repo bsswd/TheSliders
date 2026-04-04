@@ -15,4 +15,10 @@ class THESLIDERS_API UTS_AbilitySystemComponent : public UAbilitySystemComponent
 public:
 	
 	virtual void OnGiveAbility(FGameplayAbilitySpec& AbilitySpec) override;
+	virtual void OnRep_ActivateAbilities() override;
+	
+	
+private:
+
+	void HandleAutoActivatedAbility(const FGameplayAbilitySpec& AbilitySpec);
 };

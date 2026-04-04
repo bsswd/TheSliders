@@ -9,7 +9,7 @@
 
 namespace TSTags
 {
-	namespace TSAbilities
+	namespace Abilities
 	{
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(ActivateOnGiven);		
 		
@@ -29,6 +29,20 @@ namespace TSTags
         	UE_DECLARE_GAMEPLAY_TAG_EXTERN(MeleeAttack);
 			UE_DECLARE_GAMEPLAY_TAG_EXTERN(RangeAttack);
 			UE_DECLARE_GAMEPLAY_TAG_EXTERN(Jump);
+			UE_DECLARE_GAMEPLAY_TAG_EXTERN(HitReact);
         }
+	}
+
+	namespace  Events
+	{
+		namespace Player
+		{
+			UE_DECLARE_GAMEPLAY_TAG_EXTERN(MeleeAttack);
+		}
+		
+		namespace Enemy
+		{
+			UE_DECLARE_GAMEPLAY_TAG_EXTERN(HitReact);
+		}
 	}
 }
