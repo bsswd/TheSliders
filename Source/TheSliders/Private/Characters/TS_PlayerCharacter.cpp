@@ -31,14 +31,18 @@ ATS_PlayerCharacter::ATS_PlayerCharacter()
 	
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>("CameraBoom");
 	CameraBoom->SetupAttachment(GetRootComponent());
-	CameraBoom->TargetArmLength = 300.0f;
+	CameraBoom->TargetArmLength = 6000.f;
 	CameraBoom->bUsePawnControlRotation = false;
+	CameraBoom->bInheritYaw = false;
+	CameraBoom->bEnableCameraLag = true;
+	CameraBoom->CameraLagSpeed = 4.f;
+	CameraBoom->CameraLagMaxDistance = 0.f;
 	
 	SideCamera = CreateDefaultSubobject<UCameraComponent>("SideCamera");
 	SideCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	SideCamera->bUsePawnControlRotation = false;
-	SideCamera->SetProjectionMode(ECameraProjectionMode::Orthographic);
-	SideCamera->SetOrthoWidth(1200.f);
+	SideCamera->SetProjectionMode(ECameraProjectionMode::Perspective);
+	SideCamera->FieldOfView = 10.f;
 	
 	AttackFrameIndex = 3;
 }

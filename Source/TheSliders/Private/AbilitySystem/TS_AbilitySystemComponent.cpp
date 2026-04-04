@@ -2,7 +2,6 @@
 
 
 #include "AbilitySystem/TS_AbilitySystemComponent.h"
-
 #include "GameplayTags/TSTags.h"
 
 
@@ -16,7 +15,7 @@ void UTS_AbilitySystemComponent::OnGiveAbility(FGameplayAbilitySpec& AbilitySpec
 	{
 		if (Tag.MatchesTagExact(TSTags::TSAbilities::ActivateOnGiven))
 		{
-			
+			return;
 		}
 	}
 }
