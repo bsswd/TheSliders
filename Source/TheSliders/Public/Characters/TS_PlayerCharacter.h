@@ -22,7 +22,7 @@ public:
     TMap<ESpeed, float> SpeedMap;
         
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TS|Movement")
-    TMap<EJumpHeight, float> JumpMap;
+    TMap<EJump, float> JumpMap;
 	
 	virtual void ApplyStats(FName RowName) override;
 	

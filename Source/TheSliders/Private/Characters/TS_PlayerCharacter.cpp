@@ -45,9 +45,9 @@ ATS_PlayerCharacter::ATS_PlayerCharacter()
 	SpeedMap.Add(ESpeed::Middle, 600.0f);
     SpeedMap.Add(ESpeed::Fast, 1000.0f);
      
-	JumpMap.Add(EJumpHeight::None, 0.0f);
-	JumpMap.Add(EJumpHeight::Middle, 600.0f);
-	JumpMap.Add(EJumpHeight::High, 1200.0f);
+	JumpMap.Add(EJump::None, 0.0f);
+	JumpMap.Add(EJump::Middle, 600.0f);
+	JumpMap.Add(EJump::High, 1200.0f);
 }
 
 void ATS_PlayerCharacter::ApplyStats(FName RowName)
@@ -61,7 +61,7 @@ void ATS_PlayerCharacter::ApplyStats(FName RowName)
 			MoveComp->MaxWalkSpeed = *SpeedValue;
 		}
 		
-		if (const float* JumpValue = JumpMap.Find(CharacterStats.JumpHeight))
+		if (const float* JumpValue = JumpMap.Find(CharacterStats.Jump))
 		{
 			MoveComp->JumpZVelocity = *JumpValue;
 		}
