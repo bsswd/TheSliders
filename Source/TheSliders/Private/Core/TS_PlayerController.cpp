@@ -2,8 +2,6 @@
 
 
 #include "Core/TS_PlayerController.h"
-#include "AbilitySystemBlueprintLibrary.h"
-#include "AbilitySystemComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "Characters/TS_PlayerCharacter.h"
@@ -86,23 +84,25 @@ void ATS_PlayerController::Attack()
 
 void ATS_PlayerController::SelectDoc()
 {
+	GetBaseCharacter()->ApplyStats(FName(TEXT("Doc")));
 }
 
 void ATS_PlayerController::SelectBald()
 {
+	GetBaseCharacter()->ApplyStats(FName(TEXT("Bald")));
 }
 
 void ATS_PlayerController::SelectLaw()
 {
-	
+	GetBaseCharacter()->ApplyStats(FName(TEXT("Law")));	
 }
 
 void ATS_PlayerController::SelectSazz()
 {
-	
+	GetBaseCharacter()->ApplyStats(FName(TEXT("Sazz")));	
 }
 
 void ATS_PlayerController::SelectJoka()
 {
-	
+	GetBaseCharacter()->ApplyStats(FName(TEXT("Joka")));
 }

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "PaperCharacter.h"
+#include "Engine/DataTable.h"
 #include "TS_BaseCharacter.generated.h"
 
 class UBoxComponent;
@@ -22,6 +23,7 @@ public:
 	/** FUNCTIONS **/
 	
 	virtual void PlayAttackAnimation();
+	void ApplyStats(const FName RowName) const;
 	
 protected:
 
@@ -41,6 +43,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TS|Flipbooks")
 	TObjectPtr<UPaperFlipbook> AttackFlipbook;
 	
+	
 	/** Animation setup **/
 	
 	UPROPERTY(EditAnywhere, Category="TS|Animation")
@@ -55,6 +58,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TS|Character|Attack")
 	TObjectPtr<UBoxComponent> HitBox;
 	
+	/** Stats **/
+	
+	UPROPERTY(EditAnywhere, Category = "TS|Data")
+    UDataTable* StatsTable;
+	
+	
 	/** FUNCTIONS **/	
 	
 	/** Basic **/
@@ -65,7 +74,6 @@ protected:
 private:
 
 	/** PROPERTIES **/
-	
 	
 	UPROPERTY()
 	TObjectPtr<UPaperFlipbook>  CurrentFlipbook = nullptr;

@@ -3,10 +3,11 @@
 
 #include "TheSliders/Public/Characters/TS_BaseCharacter.h"
 #include "PaperFlipbookComponent.h"
-#include "AbilitySystemComponent.h"
 #include "Components/BoxComponent.h"
+#include "Core/CharacterStats.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
+DEFINE_LOG_CATEGORY_STATIC(LogBaseCharacter, Log, All);
 
 ATS_BaseCharacter::ATS_BaseCharacter()
 {
@@ -93,4 +94,24 @@ void ATS_BaseCharacter::PlayAttackAnimation()
 	{
 		GetSprite()->SetFlipbook(AttackFlipbook);		
 	}
+}
+
+void ATS_BaseCharacter::ApplyStats(const FName RowName) const
+{
+
+	if (!StatsTable)
+	{
+		UE_LOG(LogBaseCharacter, Error, TEXT("DataTable not found!"));
+		return;
+	}
+   
+    FCharacterStats* FoundStats = StatsTable->FindRow<FCharacterStats>(RowName, TEXT("StatsLookup"));
+     
+    if (!FoundStats)
+    {
+    	UE_LOG(LogBaseCharacter, Error, TEXT("Stats not found!"));
+    	return;
+    }
+    	
+	UE_LOG(LogBaseCharacter, Log, TEXT("Stats for %s applied successfully!"), *RowName.ToString());
 }
