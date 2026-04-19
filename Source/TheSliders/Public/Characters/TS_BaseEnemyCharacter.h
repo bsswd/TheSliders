@@ -6,8 +6,6 @@
 #include "TS_BaseCharacter.h"
 #include "TS_BaseEnemyCharacter.generated.h"
 
-class UAbilitySystemComponent;
-
 UCLASS()
 class THESLIDERS_API ATS_BaseEnemyCharacter : public ATS_BaseCharacter
 {
@@ -16,7 +14,6 @@ class THESLIDERS_API ATS_BaseEnemyCharacter : public ATS_BaseCharacter
 public:
 	
 	ATS_BaseEnemyCharacter();
-	
 
 protected:
 	

@@ -1,12 +1,10 @@
 ﻿// The Sliders Game. Made by Alex Sinkin (C)
 
-
 #include "Core/TS_PlayerController.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "Characters/TS_PlayerCharacter.h"
 #include "GameFramework/Character.h"
-
 
 ATS_BaseCharacter* ATS_PlayerController::GetBaseCharacter() const
 {
@@ -72,13 +70,9 @@ void ATS_PlayerController::StopJumping()
 	}
 }
 
-
-
 void ATS_PlayerController::Attack()
 {
 	// Need to check what character is active, because different types of attacks
-	
-
 	GetBaseCharacter()->PlayAttackAnimation();	
 }
 

@@ -11,7 +11,6 @@
 class UBoxComponent;
 class UPaperFlipbook;
 
-
 UCLASS(Abstract)
 class THESLIDERS_API ATS_BaseCharacter : public APaperCharacter
 {
@@ -59,7 +58,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TS|Character|Attack")
 	TObjectPtr<UBoxComponent> HitBox;
 	
-	
 	/** Stats **/
 	
 	/** PROPERTIES **/
@@ -73,7 +71,6 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "TS|Data")
 	bool bPrintStatsDebug = false;
 	
-	
 	/** FUNCTIONS **/	
 	
 	/** Basic **/
@@ -86,7 +83,7 @@ private:
 	/** PROPERTIES **/
 	
 	UPROPERTY()
-	TObjectPtr<UPaperFlipbook>  CurrentFlipbook = nullptr;
+	TObjectPtr<UPaperFlipbook> CurrentFlipbook = nullptr;
 	
 	FTimerHandle AnimationTimerHandle;
 	float LastSpeed = 0.f;

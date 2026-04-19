@@ -1,6 +1,5 @@
 ﻿// The Sliders Game. Made by Alex Sinkin (C)
 
-
 #include "TheSliders/Public/Characters/TS_BaseCharacter.h"
 #include "PaperFlipbookComponent.h"
 #include "Components/BoxComponent.h"
@@ -61,8 +60,7 @@ void ATS_BaseCharacter::CheckAndUpdateMovementAnimation()
 		
 		if (GetCharacterMovement()->IsFalling())
 		{
-			GetSprite()->SetFlipbook(JumpFlipbook);
-			
+			GetSprite()->SetFlipbook(JumpFlipbook);			
 		}
 		else
 		{
@@ -98,7 +96,7 @@ void ATS_BaseCharacter::PlayAttackAnimation()
 
 /** Stats **/
 
-void ATS_BaseCharacter::ApplyStats(FName RowName)
+void ATS_BaseCharacter::ApplyStats(const FName RowName)
 {
 	if (!StatsTable)
 	{
@@ -126,10 +124,11 @@ void ATS_BaseCharacter::ApplyStats(FName RowName)
 	UE_LOG(LogBaseCharacter, Log, TEXT("Stats for %s applied successfully!"), *RowName.ToString());
 }
 
-void ATS_BaseCharacter::PrintDebugStats(FName CharacterName, FCharacterStats Stats, const bool bPrint)
+void ATS_BaseCharacter::PrintDebugStats(const FName CharacterName, FCharacterStats Stats, const bool bPrint)
 {
 	if (!bPrint || !GEngine)
 	{
+		UE_LOG(LogBaseCharacter, Error, TEXT("Disable logging or error of GEngine"));
 		return;
 	}
 	

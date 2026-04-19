@@ -1,8 +1,6 @@
 ﻿// The Sliders Game. Made by Alex Sinkin (C)
 
-
 #include "Characters/TS_BaseEnemyCharacter.h"
-
 
 ATS_BaseEnemyCharacter::ATS_BaseEnemyCharacter()
 {

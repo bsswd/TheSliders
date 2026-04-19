@@ -1,12 +1,10 @@
 ﻿// The Sliders Game. Made by Alex Sinkin (C)
 
-
 #include "Characters/TS_PlayerCharacter.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
-
 
 ATS_PlayerCharacter::ATS_PlayerCharacter()
 {
@@ -50,7 +48,7 @@ ATS_PlayerCharacter::ATS_PlayerCharacter()
 	JumpMap.Add(EJump::High, 1200.0f);
 }
 
-void ATS_PlayerCharacter::ApplyStats(FName RowName)
+void ATS_PlayerCharacter::ApplyStats(const FName RowName)
 {
 	Super::ApplyStats(RowName);
 	

@@ -26,14 +26,13 @@ public:
 	
 	virtual void ApplyStats(FName RowName) override;
 	
-	
 private:
 
 	/** PROPERTIES **/
 	
 	UPROPERTY(VisibleAnywhere, Category = "TS|Camera")
-	TObjectPtr<class USpringArmComponent> CameraBoom;
+	TObjectPtr<USpringArmComponent> CameraBoom;
 	
 	UPROPERTY(VisibleAnywhere, Category = "TS|Camera")
-	TObjectPtr<class UCameraComponent> SideCamera;
+	TObjectPtr<UCameraComponent> SideCamera;
 };
