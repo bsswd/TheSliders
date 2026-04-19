@@ -6,10 +6,9 @@
 #include "AbilitySystemComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
-#include "PaperFlipbookComponent.h"
 #include "Characters/TS_PlayerCharacter.h"
 #include "GameFramework/Character.h"
-#include "GameplayTags/TSTags.h"
+
 
 ATS_BaseCharacter* ATS_PlayerController::GetBaseCharacter() const
 {
@@ -75,48 +74,35 @@ void ATS_PlayerController::StopJumping()
 	}
 }
 
-void ATS_PlayerController::ActivateAbility(const FGameplayTag& AbilityTag) const
-{
-	UAbilitySystemComponent* ASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetPawn());
-	if (!IsValid(ASC)) return;
-	
-	ASC->TryActivateAbilitiesByTag(AbilityTag.GetSingleTagContainer());	
-}
+
 
 void ATS_PlayerController::Attack()
 {
 	// Need to check what character is active, because different types of attacks
 	
-	ActivateAbility(TSTags::Abilities::Player::MeleeAttack);
-	GetBaseCharacter()->PlayAttackAnimation();
-	
-	
-	
-	
-	
+
+	GetBaseCharacter()->PlayAttackAnimation();	
 }
 
 void ATS_PlayerController::SelectDoc()
 {
-	ActivateAbility(TSTags::Abilities::Player::DocSelect);
 }
 
 void ATS_PlayerController::SelectBald()
 {
-	ActivateAbility(TSTags::Abilities::Player::BaldSelect);
 }
 
 void ATS_PlayerController::SelectLaw()
 {
-	ActivateAbility(TSTags::Abilities::Player::LawSelect);
+	
 }
 
 void ATS_PlayerController::SelectSazz()
 {
-	ActivateAbility(TSTags::Abilities::Player::SazzSelect);
+	
 }
 
 void ATS_PlayerController::SelectJoka()
 {
-	ActivateAbility(TSTags::Abilities::Player::JokaSelect);
+	
 }
