@@ -100,7 +100,6 @@ void ATS_BaseCharacter::PlayAttackAnimation()
 
 void ATS_BaseCharacter::ApplyStats(FName RowName)
 {
-
 	if (!StatsTable)
 	{
 		UE_LOG(LogBaseCharacter, Error, TEXT("DataTable not found!"));

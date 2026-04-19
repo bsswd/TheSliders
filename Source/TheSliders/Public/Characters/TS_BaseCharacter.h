@@ -24,7 +24,7 @@ public:
 	/** FUNCTIONS **/
 	
 	virtual void PlayAttackAnimation();
-	void ApplyStats(FName RowName);
+	virtual void ApplyStats(FName RowName);
 	
 protected:
 
