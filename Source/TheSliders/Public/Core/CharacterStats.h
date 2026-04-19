@@ -11,13 +11,13 @@ UENUM(BlueprintType)
 enum class EWeight : uint8
 {
 	Light  UMETA(DisplayName = "Light"),
-	Heavy  UMETA(DisplayName = "Heavy"),
-	Middle UMETA(DisplayName = "Middle")
+	Middle UMETA(DisplayName = "Middle"),
+	Heavy  UMETA(DisplayName = "Heavy")
 };
 
 
 UENUM(BlueprintType)
-enum class EJumpHeight : uint8
+enum class EJump : uint8
 {
 	None   UMETA(DisplayName = "None"),
 	Middle UMETA(DisplayName = "Middle"),
@@ -35,11 +35,19 @@ enum class ESpeed : uint8
  
 
 UENUM(BlueprintType)
-enum class EAttackRange : uint8
+enum class ERange : uint8
 {
 	Close  UMETA(DisplayName = "Close"),
 	Middle UMETA(DisplayName = "Middle"),
 	Far    UMETA(DisplayName = "Far")
+};
+
+UENUM(BlueprintType)
+enum class EDamage : uint8
+{
+	Light  UMETA(DisplayName = "Light"),
+	Middle UMETA(DisplayName = "Middle"),
+	Strong    UMETA(DisplayName = "Strong")
 };
  
 
@@ -53,14 +61,17 @@ public:
 	float Health = 100.0f;
  
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats")
-	EWeight Weight = EWeight::Middle;
- 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats")
-	EJumpHeight JumpHeight = EJumpHeight::Middle;
- 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats")
 	ESpeed Speed = ESpeed::Middle;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats")
+	EJump Jump = EJump::Middle;
  
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats")
-	EAttackRange AttackRange = EAttackRange::Close;
+	EWeight Weight = EWeight::Middle;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats")
+	ERange Range = ERange::Middle;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats")
+	EDamage Damage = EDamage::Middle;
 };

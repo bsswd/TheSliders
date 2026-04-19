@@ -117,9 +117,10 @@ void ATS_BaseCharacter::ApplyStats(FName RowName)
     
     CharacterStats.Health = FoundStats->Health;
 	CharacterStats.Weight = FoundStats->Weight;
-	CharacterStats.JumpHeight = FoundStats->JumpHeight;
+	CharacterStats.Jump = FoundStats->Jump;
 	CharacterStats.Speed = FoundStats->Speed;
-	CharacterStats.AttackRange = FoundStats->AttackRange;
+	CharacterStats.Range = FoundStats->Range;
+	CharacterStats.Damage = FoundStats->Damage;
 	
 	PrintDebugStats(RowName, CharacterStats, bPrintStatsDebug);
     	
@@ -134,24 +135,27 @@ void ATS_BaseCharacter::PrintDebugStats(FName CharacterName, FCharacterStats Sta
 	}
 	
 	const UEnum* WeightEnum = StaticEnum<EWeight>();
-	const UEnum* JumpHeightEnum = StaticEnum<EJumpHeight>();
+	const UEnum* JumpHeightEnum = StaticEnum<EJump>();
 	const UEnum* SpeedEnum = StaticEnum<ESpeed>();
-	const UEnum* AttackRangeEnum = StaticEnum<EAttackRange>();
+	const UEnum* RangeEnum = StaticEnum<ERange>();
+	const UEnum* DamageEnum = StaticEnum<EDamage>();
 	
 	const FString CharacterNameString = CharacterName.ToString();
 	const FString WeightString = WeightEnum ? WeightEnum->GetNameStringByValue(static_cast<int64>(Stats.Weight)) : TEXT("Unknown");
-	const FString JumpHeightString = JumpHeightEnum ? JumpHeightEnum->GetNameStringByValue(static_cast<int64>(Stats.JumpHeight)) : TEXT("Unknown");
+	const FString JumpHeightString = JumpHeightEnum ? JumpHeightEnum->GetNameStringByValue(static_cast<int64>(Stats.Jump)) : TEXT("Unknown");
 	const FString SpeedString = SpeedEnum ? SpeedEnum->GetNameStringByValue(static_cast<int64>(Stats.Speed)) : TEXT("Unknown");
-	const FString AttackRangeString = AttackRangeEnum ? AttackRangeEnum->GetNameStringByValue(static_cast<int64>(Stats.AttackRange)) : TEXT("Unknown");
+	const FString RangeString = RangeEnum ? RangeEnum->GetNameStringByValue(static_cast<int64>(Stats.Range)) : TEXT("Unknown");
+	const FString DamageString = DamageEnum ? RangeEnum->GetNameStringByValue(static_cast<int64>(Stats.Damage)) : TEXT("Unknown");
 
 	const FString DebugString = FString::Printf(
-		TEXT("NAME: %s\nHEALTH: %.2f\nWEIGHT: %s\nJUMP HEIGHT: %s\nSPEED: %s\nATTACK RANGE: %s"),
+		TEXT("NAME: %s\nHEALTH: %.2f\nWEIGHT: %s\nJUMP HEIGHT: %s\nSPEED: %s\nRANGE: %s\nDAMAGE: %s"),
 		*CharacterNameString,
 		Stats.Health,
 		*WeightString,
 		*JumpHeightString,
 		*SpeedString,
-		*AttackRangeString
+		*RangeString,
+		*DamageString
 	);
  
 	GEngine->AddOnScreenDebugMessage(
