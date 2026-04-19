@@ -2,7 +2,6 @@
 
 
 #include "TheSliders/Public/Characters/TS_BaseCharacter.h"
-#include "GameplayAbilitySpec.h"
 #include "PaperFlipbookComponent.h"
 #include "AbilitySystemComponent.h"
 #include "Components/BoxComponent.h"
@@ -93,23 +92,5 @@ void ATS_BaseCharacter::PlayAttackAnimation()
 	if (GetVelocity().X == 0.f && GetVelocity().Z == 0.f)
 	{
 		GetSprite()->SetFlipbook(AttackFlipbook);		
-	}
-}
-
-/** Ability system **/
-
-UAbilitySystemComponent* ATS_BaseCharacter::GetAbilitySystemComponent() const
-{
-	return nullptr;
-}
-
-void ATS_BaseCharacter::GiveStartupAbilities()
-{
-	if (!IsValid(GetAbilitySystemComponent())) return;
-	
-	for (const auto& Ability : StartupAbilities)
-	{
-		FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(Ability);
-		GetAbilitySystemComponent()->GiveAbility(AbilitySpec);
 	}
 }

@@ -72,7 +72,5 @@ private:
 	void SelectBald();
 	void SelectLaw();
 	void SelectSazz();
-	void SelectJoka();
-	
-	void ActivateAbility(const FGameplayTag& AbilityTag) const;
+	void SelectJoka();	
 };

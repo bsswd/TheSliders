@@ -3,11 +3,9 @@
 
 #include "Characters/TS_PlayerCharacter.h"
 
-#include "AbilitySystemComponent.h"
-#include "PaperFlipbookComponent.h"
+
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
-#include "Core/TS_PlayerState.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 
@@ -45,31 +43,4 @@ ATS_PlayerCharacter::ATS_PlayerCharacter()
 	SideCamera->FieldOfView = 10.f;
 	
 	AttackFrameIndex = 3;
-}
-
-UAbilitySystemComponent* ATS_PlayerCharacter::GetAbilitySystemComponent() const
-{
-	ATS_PlayerState* TSPlayerState = Cast<ATS_PlayerState>(GetPlayerState());
-	if (!IsValid(TSPlayerState)) return nullptr;
-	
-	return TSPlayerState->GetAbilitySystemComponent();
-}
-
-void ATS_PlayerCharacter::PossessedBy(AController* EventController)
-{
-	Super::PossessedBy(EventController);
-	
-	if (!IsValid(GetAbilitySystemComponent()) || !HasAuthority()) return;
-	
-	GetAbilitySystemComponent()->InitAbilityActorInfo(GetPlayerState(), this);
-	GiveStartupAbilities();
-}
-
-void ATS_PlayerCharacter::OnRep_PlayerState()
-{
-	Super::OnRep_PlayerState();
-	
-	if (!IsValid(GetAbilitySystemComponent())) return;
-	
-	GetAbilitySystemComponent()->InitAbilityActorInfo(GetPlayerState(), this);
 }

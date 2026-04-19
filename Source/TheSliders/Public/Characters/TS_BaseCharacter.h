@@ -3,17 +3,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AbilitySystemInterface.h"
 #include "PaperCharacter.h"
 #include "TS_BaseCharacter.generated.h"
 
 class UBoxComponent;
-class UGameplayAbility;
 class UPaperFlipbook;
 
 
 UCLASS(Abstract)
-class THESLIDERS_API ATS_BaseCharacter : public APaperCharacter, public IAbilitySystemInterface
+class THESLIDERS_API ATS_BaseCharacter : public APaperCharacter
 {
 	GENERATED_BODY()
 
@@ -23,7 +21,6 @@ public:
 	
 	/** FUNCTIONS **/
 	
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;	
 	virtual void PlayAttackAnimation();
 	
 protected:
@@ -60,10 +57,6 @@ protected:
 	
 	/** FUNCTIONS **/	
 	
-	/** Ability system **/
-	
-	void GiveStartupAbilities();
-	
 	/** Basic **/
 	
 	virtual void BeginPlay() override;
@@ -72,9 +65,7 @@ protected:
 private:
 
 	/** PROPERTIES **/
-
-	UPROPERTY(EditDefaultsOnly, Category = "TS|Abilities")
-	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
+	
 	
 	UPROPERTY()
 	TObjectPtr<UPaperFlipbook>  CurrentFlipbook = nullptr;

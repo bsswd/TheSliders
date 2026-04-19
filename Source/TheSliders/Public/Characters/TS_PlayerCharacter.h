@@ -18,11 +18,6 @@ public:
 
 	ATS_PlayerCharacter();
 	
-	/** FUNCTIONS **/
-	
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-	virtual void PossessedBy(AController* EventController) override;
-	virtual void OnRep_PlayerState() override;
 	
 private:
 
