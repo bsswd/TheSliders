@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "PaperCharacter.h"
+#include "Core/CharacterStats.h"
 #include "Engine/DataTable.h"
 #include "TS_BaseCharacter.generated.h"
 
@@ -23,7 +24,7 @@ public:
 	/** FUNCTIONS **/
 	
 	virtual void PlayAttackAnimation();
-	void ApplyStats(const FName RowName) const;
+	void ApplyStats(FName RowName);
 	
 protected:
 
@@ -58,10 +59,19 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TS|Character|Attack")
 	TObjectPtr<UBoxComponent> HitBox;
 	
+	
 	/** Stats **/
+	
+	/** PROPERTIES **/
 	
 	UPROPERTY(EditAnywhere, Category = "TS|Data")
     UDataTable* StatsTable;
+    
+    UPROPERTY(VisibleAnywhere, Category = "TS|Data")
+    FCharacterStats CharacterStats;
+	
+	UPROPERTY(EditAnywhere, Category = "TS|Data")
+	bool bPrintStatsDebug = false;
 	
 	
 	/** FUNCTIONS **/	
@@ -87,4 +97,5 @@ private:
 	/** FUNCTIONS **/
 	
 	void CheckAndUpdateMovementAnimation();	
+	static void PrintDebugStats(FName CharacterName, FCharacterStats Stats, const bool bPrint);
 };

@@ -96,7 +96,9 @@ void ATS_BaseCharacter::PlayAttackAnimation()
 	}
 }
 
-void ATS_BaseCharacter::ApplyStats(const FName RowName) const
+/** Stats **/
+
+void ATS_BaseCharacter::ApplyStats(FName RowName)
 {
 
 	if (!StatsTable)
@@ -112,6 +114,50 @@ void ATS_BaseCharacter::ApplyStats(const FName RowName) const
     	UE_LOG(LogBaseCharacter, Error, TEXT("Stats not found!"));
     	return;
     }
+    
+    CharacterStats.Health = FoundStats->Health;
+	CharacterStats.Weight = FoundStats->Weight;
+	CharacterStats.JumpHeight = FoundStats->JumpHeight;
+	CharacterStats.Speed = FoundStats->Speed;
+	CharacterStats.AttackRange = FoundStats->AttackRange;
+	
+	PrintDebugStats(RowName, CharacterStats, bPrintStatsDebug);
     	
 	UE_LOG(LogBaseCharacter, Log, TEXT("Stats for %s applied successfully!"), *RowName.ToString());
+}
+
+void ATS_BaseCharacter::PrintDebugStats(FName CharacterName, FCharacterStats Stats, const bool bPrint)
+{
+	if (!bPrint || !GEngine)
+	{
+		return;
+	}
+	
+	const UEnum* WeightEnum = StaticEnum<EWeight>();
+	const UEnum* JumpHeightEnum = StaticEnum<EJumpHeight>();
+	const UEnum* SpeedEnum = StaticEnum<ESpeed>();
+	const UEnum* AttackRangeEnum = StaticEnum<EAttackRange>();
+	
+	const FString CharacterNameString = CharacterName.ToString();
+	const FString WeightString = WeightEnum ? WeightEnum->GetNameStringByValue(static_cast<int64>(Stats.Weight)) : TEXT("Unknown");
+	const FString JumpHeightString = JumpHeightEnum ? JumpHeightEnum->GetNameStringByValue(static_cast<int64>(Stats.JumpHeight)) : TEXT("Unknown");
+	const FString SpeedString = SpeedEnum ? SpeedEnum->GetNameStringByValue(static_cast<int64>(Stats.Speed)) : TEXT("Unknown");
+	const FString AttackRangeString = AttackRangeEnum ? AttackRangeEnum->GetNameStringByValue(static_cast<int64>(Stats.AttackRange)) : TEXT("Unknown");
+
+	const FString DebugString = FString::Printf(
+		TEXT("NAME: %s\nHEALTH: %.2f\nWEIGHT: %s\nJUMP HEIGHT: %s\nSPEED: %s\nATTACK RANGE: %s"),
+		*CharacterNameString,
+		Stats.Health,
+		*WeightString,
+		*JumpHeightString,
+		*SpeedString,
+		*AttackRangeString
+	);
+ 
+	GEngine->AddOnScreenDebugMessage(
+		-1,                  
+		5.f,                
+		FColor::Green,       
+		DebugString          
+	);
 }
