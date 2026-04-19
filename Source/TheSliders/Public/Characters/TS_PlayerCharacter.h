@@ -18,6 +18,14 @@ public:
 
 	ATS_PlayerCharacter();
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TS|Movement")
+    TMap<ESpeed, float> SpeedMap;
+        
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TS|Movement")
+    TMap<EJumpHeight, float> JumpMap;
+	
+	virtual void ApplyStats(FName RowName) override;
+	
 	
 private:
 

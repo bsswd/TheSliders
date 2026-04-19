@@ -18,9 +18,7 @@ ATS_PlayerCharacter::ATS_PlayerCharacter()
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
 	
-	GetCharacterMovement()->JumpZVelocity = 500.f;
 	GetCharacterMovement()->AirControl = 0.35f;
-	GetCharacterMovement()->MaxWalkSpeed = 400.f;
 	GetCharacterMovement()->MinAnalogWalkSpeed = 20.f;
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 	GetCharacterMovement()->BrakingDecelerationFalling = 1500.f;
@@ -42,4 +40,30 @@ ATS_PlayerCharacter::ATS_PlayerCharacter()
 	SideCamera->FieldOfView = 10.f;
 	
 	AttackFrameIndex = 3;
+	
+	SpeedMap.Add(ESpeed::Slow, 200.0f);
+	SpeedMap.Add(ESpeed::Middle, 600.0f);
+    SpeedMap.Add(ESpeed::Fast, 1000.0f);
+     
+	JumpMap.Add(EJumpHeight::None, 0.0f);
+	JumpMap.Add(EJumpHeight::Middle, 600.0f);
+	JumpMap.Add(EJumpHeight::High, 1200.0f);
+}
+
+void ATS_PlayerCharacter::ApplyStats(FName RowName)
+{
+	Super::ApplyStats(RowName);
+	
+	if (UCharacterMovementComponent* MoveComp = GetCharacterMovement())
+	{
+		if (const float* SpeedValue = SpeedMap.Find(CharacterStats.Speed))
+		{
+			MoveComp->MaxWalkSpeed = *SpeedValue;
+		}
+		
+		if (const float* JumpValue = JumpMap.Find(CharacterStats.JumpHeight))
+		{
+			MoveComp->JumpZVelocity = *JumpValue;
+		}
+	}
 }
