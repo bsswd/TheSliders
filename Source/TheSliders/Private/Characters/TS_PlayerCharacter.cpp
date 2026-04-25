@@ -46,6 +46,10 @@ ATS_PlayerCharacter::ATS_PlayerCharacter()
 	JumpMap.Add(EJump::None, 0.0f);
 	JumpMap.Add(EJump::Middle, 600.0f);
 	JumpMap.Add(EJump::High, 1200.0f);
+	
+	AttackRangeMap.Add(ERange::Close, 150.f);
+	AttackRangeMap.Add(ERange::Middle, 300.f);
+	AttackRangeMap.Add(ERange::Far, 600.f);
 }
 
 void ATS_PlayerCharacter::ApplyStats(const FName RowName)

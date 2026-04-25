@@ -26,6 +26,9 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TS|Movement")
     TMap<EJump, float> JumpMap;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TS|Movement")
+	TMap<ERange, float> AttackRangeMap;
+	
 	
 	/** FUNCTIONS **/
 	
