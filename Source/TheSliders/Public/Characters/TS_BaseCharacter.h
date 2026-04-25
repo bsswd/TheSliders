@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "PaperCharacter.h"
 #include "Core/CharacterStats.h"
-#include "Engine/DataTable.h"
 #include "TS_BaseCharacter.generated.h"
 
 class UBoxComponent;
@@ -21,6 +20,9 @@ public:
 	ATS_BaseCharacter();
 	
 	/** FUNCTIONS **/
+	
+	UFUNCTION()
+	bool GetFacingRight() const {return bIsFacingRight;}
 	
 	virtual void PlayAttackAnimation();
 	virtual void ApplyStats(FName RowName);

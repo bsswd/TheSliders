@@ -73,7 +73,23 @@ void ATS_PlayerController::StopJumping()
 void ATS_PlayerController::Attack()
 {
 	// Need to check what character is active, because different types of attacks
-	GetBaseCharacter()->PlayAttackAnimation();	
+	GetBaseCharacter()->PlayAttackAnimation();
+	
+	ATS_PlayerCharacter* PlayerCharacter = GetPlayerCharacter();
+ 
+	if (!PlayerCharacter)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ATS_PlayerController: Not found PlayerCharacter"));
+	}
+	
+	UAttackComponent* AttackComponent = PlayerCharacter->FindComponentByClass<UAttackComponent>();
+	
+	if (!AttackComponent)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ATS_PlayerController: Not found AttackComponent"));
+	}
+	
+	AttackComponent->PerformAttack();
 }
 
 void ATS_PlayerController::SelectDoc()
