@@ -38,8 +38,6 @@ ATS_PlayerCharacter::ATS_PlayerCharacter()
 	SideCamera->SetProjectionMode(ECameraProjectionMode::Perspective);
 	SideCamera->FieldOfView = 10.f;
 	
-	AttackFrameIndex = 3;
-	
 	SpeedMap.Add(ESpeed::Slow, 200.0f);
 	SpeedMap.Add(ESpeed::Middle, 600.0f);
     SpeedMap.Add(ESpeed::Fast, 1000.0f);
@@ -76,5 +74,7 @@ void ATS_PlayerCharacter::ApplyStats(const FName RowName)
 		{
 			AttackComponent->Range = *RangeValue;
 		}
+		
+		AttackComponent->TargetAttackFrameIndex = CharacterStats.AttackFrameIndex;
 	}
 }

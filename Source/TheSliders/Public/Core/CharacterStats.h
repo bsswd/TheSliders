@@ -74,4 +74,7 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats")
 	EDamage Damage = EDamage::Middle;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats")
+	int32 AttackFrameIndex = 0;
 };

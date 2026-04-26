@@ -88,8 +88,6 @@ void ATS_PlayerController::Attack()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("ATS_PlayerController: Not found AttackComponent"));
 	}
-	
-	AttackComponent->PerformAttack();
 }
 
 void ATS_PlayerController::SelectDoc()

@@ -6,14 +6,31 @@
 #include "PaperFlipbookComponent.h"
 #include "PaperFlipbook.h"
 #include "GameFramework/Actor.h"
-#include "Characters/TS_BaseCharacter.h"
+#include "Characters/TS_PlayerCharacter.h"
 #include "Engine/World.h"
 #include "TimerManager.h"
+
 
 
 UAttackComponent::UAttackComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
+	
+	const ATS_BaseCharacter* Owner = Cast<ATS_BaseCharacter>(GetOwner());
+	
+	if (!Owner)
+	{
+		UE_LOG(LogAttackComponent, Error, TEXT("Owner not valid!"))
+		return;
+	}
+	
+	FlipbookComponent = Owner->FindComponentByClass<UPaperFlipbookComponent>();
+	
+	if (!FlipbookComponent)
+	{
+		UE_LOG(LogAttackComponent, Error, TEXT("FlipbookComponent not valid!"))
+		return;
+	}
 }
 
 void UAttackComponent::BeginPlay()
@@ -85,34 +102,17 @@ FVector UAttackComponent::GetCalculatedDirection() const
 
 void UAttackComponent::CheckAttackFrameIndex()
 {
-	AActor* Owner = GetOwner();
-	if (!Owner)
-	{
-		UE_LOG(LogAttackComponent, Error, TEXT("Owner not valid!"))
-		return;
-	}
- 
-	UPaperFlipbookComponent* Sprite = Owner->FindComponentByClass<UPaperFlipbookComponent>();
+	const int32 CurrentFrameIndex = FlipbookComponent->GetPlaybackPositionInFrames();
 	
-	if (!Sprite && !Sprite->GetFlipbook())
+	if (FlipbookComponent->GetFlipbook()->GetName().Contains(TEXT("Attack")))
 	{
-		UE_LOG(LogAttackComponent, Error, TEXT("Sprite and Flipbook not valid!"))
-		return;
-	}
-	
-	const int32 FrameIndex = Sprite->GetPlaybackPositionInFrames();
-	const FString FlipbookName = Sprite->GetFlipbook()->GetName();
-		
-	if (!FlipbookName.Contains(TEXT("Attack")))
-	{
-		return;
-	}
- 
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(
-				1, 1.1f, FColor::Cyan, 
-				FString::Printf(TEXT("Flipbook: %s | Frame: %d"), *FlipbookName, FrameIndex)
-			);
-	}
+		UE_LOG(LogAttackComponent, Warning, TEXT("TARGET: %d"), TargetAttackFrameIndex)
+		UE_LOG(LogAttackComponent, Warning, TEXT("CURRENT: %d"), CurrentFrameIndex)
+
+		if (CurrentFrameIndex == TargetAttackFrameIndex)
+		{
+			UE_LOG(LogAttackComponent, Warning, TEXT("ATTACK!"))
+			PerformAttack();
+		}
+	}	
 }

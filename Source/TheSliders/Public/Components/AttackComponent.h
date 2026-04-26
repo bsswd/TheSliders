@@ -8,6 +8,8 @@
 
 #define COLLISION_ENEMY ECC_GameTraceChannel1
 
+class UPaperFlipbookComponent;
+
 DEFINE_LOG_CATEGORY_STATIC(LogAttackComponent, Log, All)
 
 
@@ -21,6 +23,12 @@ public:
 	UAttackComponent();
 	
 	/** PROPERTIES **/
+	
+	UPROPERTY(VisibleAnywhere, Category = "TS|Attack|Settings")
+	UPaperFlipbookComponent* FlipbookComponent;
+	
+	UPROPERTY(VisibleAnywhere, Category = "TS|Attack|Settings")
+	int32 TargetAttackFrameIndex = 0;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Attack|Settings")
 	float Range = 150.0f;

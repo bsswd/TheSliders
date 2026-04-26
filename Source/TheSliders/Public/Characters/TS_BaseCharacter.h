@@ -57,12 +57,7 @@ protected:
  
 	UPROPERTY(EditAnywhere, Category="TS|Animation")
 	float RunSpeedThreshold = 1.0f;
-	
-	UPROPERTY(EditAnywhere, Category="TS|Character|Attack")
-	int AttackFrameIndex;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TS|Character|Attack")
-	TObjectPtr<UBoxComponent> HitBox;
+		
 	
 	/** Stats **/
 	
@@ -96,7 +91,8 @@ private:
 	
 	bool bIsFacingRight = true;
 	bool bIsAttacking = false;
-		
+
+	
 	/** FUNCTIONS **/
 	
 	void CheckAndUpdateMovementAnimation();	

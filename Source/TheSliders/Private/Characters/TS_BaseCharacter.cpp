@@ -12,10 +12,7 @@ DEFINE_LOG_CATEGORY_STATIC(LogBaseCharacter, Log, All);
 ATS_BaseCharacter::ATS_BaseCharacter()
 {
 	PrimaryActorTick.bCanEverTick = false;
-	
-	HitBox = CreateDefaultSubobject<UBoxComponent>("HitBox");
-	HitBox->SetupAttachment(RootComponent);
-	
+		
 	AttackComponent = CreateDefaultSubobject<UAttackComponent>("AttackComponent");
 }
 
@@ -76,13 +73,11 @@ void ATS_BaseCharacter::CheckAndUpdateMovementAnimation()
 	if (GetVelocity().X > KINDA_SMALL_NUMBER && !bIsFacingRight)
 	{
 		GetSprite()->SetRelativeRotation(FRotator(0.f, 0.f, 0.f));
-		HitBox->SetRelativeLocation(FVector(130.f, 0.f, 0.f));
 		bIsFacingRight = true;
 	}
 	else if (GetVelocity().X < -KINDA_SMALL_NUMBER && bIsFacingRight)
 	{
 		GetSprite()->SetRelativeRotation(FRotator(0.f, -180.f, 0.f));
-		HitBox->SetRelativeLocation(FVector(-130.f, 0.f, 0.f));
 		bIsFacingRight = false;
 	}
 }
@@ -121,6 +116,7 @@ void ATS_BaseCharacter::ApplyStats(const FName RowName)
 	CharacterStats.Speed = FoundStats->Speed;
 	CharacterStats.Range = FoundStats->Range;
 	CharacterStats.Damage = FoundStats->Damage;
+	CharacterStats.AttackFrameIndex = FoundStats->AttackFrameIndex;
 	
 	PrintDebugStats(RowName, CharacterStats, bPrintStatsDebug);
     	
@@ -147,16 +143,18 @@ void ATS_BaseCharacter::PrintDebugStats(const FName CharacterName, FCharacterSta
 	const FString SpeedString = SpeedEnum ? SpeedEnum->GetNameStringByValue(static_cast<int64>(Stats.Speed)) : TEXT("Unknown");
 	const FString RangeString = RangeEnum ? RangeEnum->GetNameStringByValue(static_cast<int64>(Stats.Range)) : TEXT("Unknown");
 	const FString DamageString = DamageEnum ? DamageEnum->GetNameStringByValue(static_cast<int64>(Stats.Damage)) : TEXT("Unknown");
-
+		
+	
 	const FString DebugString = FString::Printf(
-		TEXT("NAME: %s\nHEALTH: %.2f\nWEIGHT: %s\nJUMP HEIGHT: %s\nSPEED: %s\nRANGE: %s\nDAMAGE: %s"),
+		TEXT("NAME: %s\nHEALTH: %.2f\nWEIGHT: %s\nJUMP HEIGHT: %s\nSPEED: %s\nRANGE: %s\nDAMAGE: %s\nATTACK INDEX: %d"),
 		*CharacterNameString,
 		Stats.Health,
 		*WeightString,
 		*JumpHeightString,
 		*SpeedString,
 		*RangeString,
-		*DamageString
+		*DamageString,
+		Stats.AttackFrameIndex
 	);
  
 	GEngine->AddOnScreenDebugMessage(
