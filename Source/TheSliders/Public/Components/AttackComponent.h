@@ -20,7 +20,7 @@ public:
 	/** PROPERTIES **/
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Attack|Settings")
-	float AttackDistance = 150.0f;
+	float Range = 150.0f;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Attack|Settings")
 	FVector2D TraceOffset = FVector2D(0.0f, 0.0f);

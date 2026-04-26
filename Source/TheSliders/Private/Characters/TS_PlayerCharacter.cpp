@@ -2,6 +2,7 @@
 
 #include "Characters/TS_PlayerCharacter.h"
 #include "Camera/CameraComponent.h"
+#include "Components/AttackComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -66,6 +67,14 @@ void ATS_PlayerCharacter::ApplyStats(const FName RowName)
 		if (const float* JumpValue = JumpMap.Find(CharacterStats.Jump))
 		{
 			MoveComp->JumpZVelocity = *JumpValue;
+		}
+	}
+	
+	if (AttackComponent)
+	{
+		if (const float* RangeValue = AttackRangeMap.Find(CharacterStats.Range))
+		{
+			AttackComponent->Range = *RangeValue;
 		}
 	}
 }

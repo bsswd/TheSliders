@@ -2,6 +2,7 @@
 
 #include "TheSliders/Public/Characters/TS_BaseCharacter.h"
 #include "PaperFlipbookComponent.h"
+#include "Components/AttackComponent.h"
 #include "Components/BoxComponent.h"
 #include "Core/CharacterStats.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -13,7 +14,9 @@ ATS_BaseCharacter::ATS_BaseCharacter()
 	PrimaryActorTick.bCanEverTick = false;
 	
 	HitBox = CreateDefaultSubobject<UBoxComponent>("HitBox");
-	HitBox->SetupAttachment(RootComponent);	
+	HitBox->SetupAttachment(RootComponent);
+	
+	AttackComponent = CreateDefaultSubobject<UAttackComponent>("AttackComponent");
 }
 
 /** BeginPlay and EndPlay **/
@@ -143,7 +146,7 @@ void ATS_BaseCharacter::PrintDebugStats(const FName CharacterName, FCharacterSta
 	const FString JumpHeightString = JumpHeightEnum ? JumpHeightEnum->GetNameStringByValue(static_cast<int64>(Stats.Jump)) : TEXT("Unknown");
 	const FString SpeedString = SpeedEnum ? SpeedEnum->GetNameStringByValue(static_cast<int64>(Stats.Speed)) : TEXT("Unknown");
 	const FString RangeString = RangeEnum ? RangeEnum->GetNameStringByValue(static_cast<int64>(Stats.Range)) : TEXT("Unknown");
-	const FString DamageString = DamageEnum ? RangeEnum->GetNameStringByValue(static_cast<int64>(Stats.Damage)) : TEXT("Unknown");
+	const FString DamageString = DamageEnum ? DamageEnum->GetNameStringByValue(static_cast<int64>(Stats.Damage)) : TEXT("Unknown");
 
 	const FString DebugString = FString::Printf(
 		TEXT("NAME: %s\nHEALTH: %.2f\nWEIGHT: %s\nJUMP HEIGHT: %s\nSPEED: %s\nRANGE: %s\nDAMAGE: %s"),

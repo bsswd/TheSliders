@@ -2,7 +2,6 @@
 
 
 #include "Components/AttackComponent.h"
-
 #include "Characters/TS_BaseCharacter.h"
 #include "Engine/World.h"
 
@@ -25,7 +24,7 @@ void UAttackComponent::PerformAttack()
 	
 	float Facing = Owner->GetActorScale3D().X > 0 ? 1.0f : -1.0f;
 	FVector Start = ActorLocation + FVector(TraceOffset.X * Facing, 0.0f, TraceOffset.Y);
-	FVector End = Start + (Direction * AttackDistance);
+	FVector End = Start + (Direction * Range);
 	
 	FHitResult HitResult;
 	FCollisionQueryParams Params;

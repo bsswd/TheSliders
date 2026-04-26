@@ -7,6 +7,7 @@
 #include "Core/CharacterStats.h"
 #include "TS_BaseCharacter.generated.h"
 
+class UAttackComponent;
 class UBoxComponent;
 class UPaperFlipbook;
 
@@ -30,6 +31,9 @@ public:
 protected:
 
 	/** PROPERTIES **/
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TS|Components")
+	TObjectPtr<UAttackComponent> AttackComponent;
 
 	/** Flipbooks **/
 	
