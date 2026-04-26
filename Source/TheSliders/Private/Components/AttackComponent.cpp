@@ -2,13 +2,31 @@
 
 
 #include "Components/AttackComponent.h"
+#include "Engine/Engine.h"
+#include "PaperFlipbookComponent.h"
+#include "PaperFlipbook.h"
+#include "GameFramework/Actor.h"
 #include "Characters/TS_BaseCharacter.h"
 #include "Engine/World.h"
+#include "TimerManager.h"
 
 
 UAttackComponent::UAttackComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
+}
+
+void UAttackComponent::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	GetWorld()->GetTimerManager().SetTimer(
+		CheckAttackFrameTimerHandle,
+		this,
+		&ThisClass::CheckAttackFrameIndex,
+		0.1f,
+		true
+	);
 }
 
 void UAttackComponent::PerformAttack()
@@ -63,5 +81,38 @@ FVector UAttackComponent::GetCalculatedDirection() const
 	}
 	
 	return FVector(-1.0f, 0.0f, 0.0f);
+}
+
+void UAttackComponent::CheckAttackFrameIndex()
+{
+	AActor* Owner = GetOwner();
+	if (!Owner)
+	{
+		UE_LOG(LogAttackComponent, Error, TEXT("Owner not valid!"))
+		return;
+	}
+ 
+	UPaperFlipbookComponent* Sprite = Owner->FindComponentByClass<UPaperFlipbookComponent>();
 	
+	if (!Sprite && !Sprite->GetFlipbook())
+	{
+		UE_LOG(LogAttackComponent, Error, TEXT("Sprite and Flipbook not valid!"))
+		return;
+	}
+	
+	const int32 FrameIndex = Sprite->GetPlaybackPositionInFrames();
+	const FString FlipbookName = Sprite->GetFlipbook()->GetName();
+		
+	if (!FlipbookName.Contains(TEXT("Attack")))
+	{
+		return;
+	}
+ 
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(
+				1, 1.1f, FColor::Cyan, 
+				FString::Printf(TEXT("Flipbook: %s | Frame: %d"), *FlipbookName, FrameIndex)
+			);
+	}
 }

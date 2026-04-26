@@ -8,6 +8,9 @@
 
 #define COLLISION_ENEMY ECC_GameTraceChannel1
 
+DEFINE_LOG_CATEGORY_STATIC(LogAttackComponent, Log, All)
+
+
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class THESLIDERS_API UAttackComponent : public UActorComponent
 {
@@ -31,10 +34,28 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Attack|Debug")
 	bool bDrawDebug = true;
 	
+	FTimerHandle CheckAttackFrameTimerHandle;
+	
+	
+	/** FUNCTIONS **/
+	
 	UFUNCTION(BlueprintCallable, Category = "Attack")
 	void PerformAttack();
  
+	
 protected:
 	
+	/** PROPERTIES **/
+	
 	FVector GetCalculatedDirection() const;	
+	
+	
+	/** FUNCTIONS **/
+	
+	virtual void BeginPlay() override;
+	
+	
+private:
+	
+	void CheckAttackFrameIndex();
 };
