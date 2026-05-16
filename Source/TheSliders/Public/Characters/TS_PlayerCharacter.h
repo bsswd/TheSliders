@@ -32,6 +32,8 @@ public:
 	
 	/** FUNCTIONS **/
 	
+	FORCEINLINE int32 GetLivesCount() {return LivesCount;}
+
 	virtual void ApplyStats(FName RowName) override;
 	
 private:
@@ -43,4 +45,7 @@ private:
 	
 	UPROPERTY(VisibleAnywhere, Category = "TS|Camera")
 	TObjectPtr<UCameraComponent> SideCamera;
+
+	UPROPERTY(VisibleAnywhere)
+	int32 LivesCount = 3;
 };

@@ -7,6 +7,7 @@
 #include "TS_BaseObstacle.generated.h"
 
 class UBoxComponent;
+class TS_PlayerCharacter;
 
 UCLASS()
 class THESLIDERS_API ATS_BaseObstacle : public AActor
@@ -21,6 +22,9 @@ protected:
 	
 	/** PROPERTIES **/
 	
+	// UPROPERTY(EditAnywhere)
+	// TObjectPtr<TS_PlayerCharacter> PlayerCharacter;
+
 	UPROPERTY(EditAnywhere)
 	TObjectPtr<UBoxComponent> TriggerBox;
 	

@@ -47,7 +47,7 @@ enum class EDamage : uint8
 {
 	Light  UMETA(DisplayName = "Light"),
 	Middle UMETA(DisplayName = "Middle"),
-	Strong    UMETA(DisplayName = "Strong")
+	Strong UMETA(DisplayName = "Strong")
 };
  
 
