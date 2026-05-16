@@ -5,7 +5,8 @@
 #include "CoreMinimal.h"
 #include "Engine/DataTable.h"
 #include "CharacterStats.generated.h"
- 
+
+class UPaperFlipbook;
 
 UENUM(BlueprintType)
 enum class EWeight : uint8
@@ -60,21 +61,33 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats")
 	float Health = 100.0f;
  
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats|Movement")
 	ESpeed Speed = ESpeed::Middle;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats|Movement")
 	EJump Jump = EJump::Middle;
  
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats|Movement")
 	EWeight Weight = EWeight::Middle;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats|Attack")
 	ERange Range = ERange::Middle;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats|Attack")
 	EDamage Damage = EDamage::Middle;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats|Attack")
 	int32 AttackFrameIndex = 0;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats|Flipbooks")
+	TObjectPtr<UPaperFlipbook> IdleFlipbook = nullptr;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats|Flipbooks")
+    TObjectPtr<UPaperFlipbook> WalkFlipbook = nullptr;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats|Flipbooks")	
+	TObjectPtr<UPaperFlipbook> JumpFlipbook = nullptr;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats|Flipbooks")
+	TObjectPtr<UPaperFlipbook> AttackFlipbook = nullptr;
 };

@@ -41,7 +41,7 @@ protected:
 	TObjectPtr<UPaperFlipbook> IdleFlipbook;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TS|Flipbooks")
-	TObjectPtr<UPaperFlipbook> RunFlipbook;
+	TObjectPtr<UPaperFlipbook> WalkFlipbook;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TS|Flipbooks")
 	TObjectPtr<UPaperFlipbook> JumpFlipbook;

@@ -3,7 +3,6 @@
 #include "TheSliders/Public/Characters/TS_BaseCharacter.h"
 #include "PaperFlipbookComponent.h"
 #include "Components/AttackComponent.h"
-#include "Components/BoxComponent.h"
 #include "Core/CharacterStats.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -50,7 +49,7 @@ void ATS_BaseCharacter::CheckAndUpdateMovementAnimation()
 	
 	if (!FMath::IsNearlyEqual(Speed, LastSpeed, 0.1f))
 	{
-		const TObjectPtr<UPaperFlipbook>  DesiredFlipbook = (Speed > RunSpeedThreshold) ? RunFlipbook : IdleFlipbook;
+		const TObjectPtr<UPaperFlipbook>  DesiredFlipbook = (Speed > RunSpeedThreshold) ? WalkFlipbook : IdleFlipbook;
 		
 		if (DesiredFlipbook && DesiredFlipbook != CurrentFlipbook)
 		{
@@ -117,6 +116,17 @@ void ATS_BaseCharacter::ApplyStats(const FName RowName)
 	CharacterStats.Range = FoundStats->Range;
 	CharacterStats.Damage = FoundStats->Damage;
 	CharacterStats.AttackFrameIndex = FoundStats->AttackFrameIndex;
+	CharacterStats.IdleFlipbook = FoundStats->IdleFlipbook;
+	CharacterStats.WalkFlipbook = FoundStats->WalkFlipbook;
+	CharacterStats.JumpFlipbook = FoundStats->JumpFlipbook;
+	CharacterStats.AttackFlipbook = FoundStats->AttackFlipbook;
+	
+	/** Set flipbooks **/
+	
+	IdleFlipbook = CharacterStats.IdleFlipbook;
+	WalkFlipbook = CharacterStats.WalkFlipbook;
+	JumpFlipbook = CharacterStats.JumpFlipbook;
+	AttackFlipbook = CharacterStats.AttackFlipbook;
 	
 	PrintDebugStats(RowName, CharacterStats, bPrintStatsDebug);
     	
