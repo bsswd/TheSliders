@@ -30,11 +30,15 @@ public:
 	TMap<ERange, float> AttackRangeMap;
 	
 	
+protected:
+	
 	/** FUNCTIONS **/
 	
 	FORCEINLINE int32 GetLivesCount() {return LivesCount;}
 
 	virtual void ApplyStats(FName RowName) override;
+	virtual void BeginPlay() override;
+	
 	
 private:
 

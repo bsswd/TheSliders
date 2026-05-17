@@ -4,6 +4,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "Characters/TS_PlayerCharacter.h"
+#include "Components/AttackComponent.h"
 #include "GameFramework/Character.h"
 
 ATS_BaseCharacter* ATS_PlayerController::GetBaseCharacter() const

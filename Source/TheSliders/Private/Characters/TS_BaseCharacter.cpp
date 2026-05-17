@@ -123,9 +123,32 @@ void ATS_BaseCharacter::ApplyStats(const FName RowName)
 	
 	/** Set flipbooks **/
 	
+	if(!CharacterStats.IdleFlipbook)
+	{
+		UE_LOG(LogBaseCharacter, Error, TEXT("IdleFlipbook is null"))
+		return;
+	}
 	IdleFlipbook = CharacterStats.IdleFlipbook;
+	
+	if(!CharacterStats.WalkFlipbook)
+	{
+		UE_LOG(LogBaseCharacter, Error, TEXT("WalkFlipbook is null"))
+		return;
+	}
 	WalkFlipbook = CharacterStats.WalkFlipbook;
+	
+	if(!CharacterStats.JumpFlipbook)
+	{
+		UE_LOG(LogBaseCharacter, Error, TEXT("JumpFlipbook is null"))
+		return;
+	}
 	JumpFlipbook = CharacterStats.JumpFlipbook;
+	
+	if(!CharacterStats.AttackFlipbook)
+	{
+		UE_LOG(LogBaseCharacter, Error, TEXT("AttackFlipbook is null"))
+		return;
+	}
 	AttackFlipbook = CharacterStats.AttackFlipbook;
 	
 	PrintDebugStats(RowName, CharacterStats, bPrintStatsDebug);

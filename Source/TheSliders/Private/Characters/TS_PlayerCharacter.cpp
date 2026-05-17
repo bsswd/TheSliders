@@ -24,8 +24,8 @@ ATS_PlayerCharacter::ATS_PlayerCharacter()
 	
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>("CameraBoom");
 	CameraBoom->SetupAttachment(GetRootComponent());
-	CameraBoom->TargetArmLength = 8000.f;
-	CameraBoom->SetRelativeLocation(FVector(0.f, 0.f, 200.f));
+	CameraBoom->TargetArmLength = 6000.f;
+	CameraBoom->SetRelativeLocation(FVector(0.f, 0.f, 0.f));
 	CameraBoom->bUsePawnControlRotation = false;
 	CameraBoom->bInheritYaw = false;
 	CameraBoom->bEnableCameraLag = true;
@@ -77,4 +77,10 @@ void ATS_PlayerCharacter::ApplyStats(const FName RowName)
 		
 		AttackComponent->TargetAttackFrameIndex = CharacterStats.AttackFrameIndex;
 	}
+}
+
+void ATS_PlayerCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	ApplyStats(FName(TEXT("Doc")));
 }

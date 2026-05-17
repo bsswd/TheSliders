@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
-#include "Components/AttackComponent.h"
 #include "TS_PlayerController.generated.h"
 
 class ATS_PlayerCharacter;
