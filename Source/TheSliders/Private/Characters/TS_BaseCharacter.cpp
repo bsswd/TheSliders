@@ -40,7 +40,7 @@ void ATS_BaseCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 void ATS_BaseCharacter::CheckAndUpdateMovementAnimation()
 {
-	float Speed = GetVelocity().Size();
+	const float Speed = GetVelocity().Size();
 	
 	if(GetSprite()->GetPlaybackPositionInFrames() == 4 && GetSprite()->GetFlipbook() == AttackFlipbook)
 	{
@@ -87,7 +87,7 @@ void ATS_BaseCharacter::PlayAttackAnimation()
 {
 	if (GetVelocity().X == 0.f && GetVelocity().Z == 0.f)
 	{
-		GetSprite()->SetFlipbook(AttackFlipbook);		
+		GetSprite()->SetFlipbook(AttackFlipbook);
 	}
 }
 
