@@ -19,7 +19,10 @@ public class TheSliders : ModuleRules
 			"GameplayAbilities",
 			"GameplayTasks",
 			"GameplayTags",
-			"CommonUI"
+			"CommonUI",
+			"Slate",
+			"SlateCore",
+			"UMG"
         });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
