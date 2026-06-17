@@ -19,6 +19,7 @@ public class TheSliders : ModuleRules
 			"GameplayAbilities",
 			"GameplayTasks",
 			"GameplayTags",
+			"CommonUI"
         });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
