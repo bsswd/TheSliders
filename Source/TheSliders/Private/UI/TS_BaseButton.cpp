@@ -2,14 +2,23 @@
 
 #include "UI/TS_BaseButton.h"
 
-FReply UTS_BaseButton::NativeOnFocusReceived(const FGeometry& InGeometry, const FFocusEvent& InFocusEvent)
+DEFINE_LOG_CATEGORY_STATIC(LogBaseButton, Log, All);
+
+
+void UTS_BaseButton::NativePreConstruct()
 {
-	ButtonIcon->SetVisibility(ESlateVisibility::Visible);
-	return Super::NativeOnFocusReceived(InGeometry, InFocusEvent);
+	Super::NativePreConstruct();
+	ButtonIcon->SetVisibility(ESlateVisibility::Collapsed);
 }
 
-void UTS_BaseButton::NativeOnFocusLost(const FFocusEvent& InFocusEvent)
+void UTS_BaseButton::NativeOnAddedToFocusPath(const FFocusEvent& InFocusEvent)
 {
+	Super::NativeOnAddedToFocusPath(InFocusEvent);
+	ButtonIcon->SetVisibility(ESlateVisibility::Visible);
+}
+
+void UTS_BaseButton::NativeOnRemovedFromFocusPath(const FFocusEvent& InFocusEvent)
+{
+	Super::NativeOnRemovedFromFocusPath(InFocusEvent);
 	ButtonIcon->SetVisibility(ESlateVisibility::Collapsed);
-	Super::NativeOnFocusLost(InFocusEvent);
 }

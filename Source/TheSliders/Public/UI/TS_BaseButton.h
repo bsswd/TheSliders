@@ -50,7 +50,7 @@ protected:
 	
 	EButtonAction MenuAction;
 	
-	
-	virtual FReply NativeOnFocusReceived(const FGeometry& InGeometry, const FFocusEvent& InFocusEvent) override;
-	virtual void NativeOnFocusLost(const FFocusEvent& InFocusEvent) override;
+	virtual void NativePreConstruct() override;
+	virtual void NativeOnAddedToFocusPath(const FFocusEvent& InFocusEvent) override;
+	virtual void NativeOnRemovedFromFocusPath(const FFocusEvent& InFocusEvent) override;
 };
