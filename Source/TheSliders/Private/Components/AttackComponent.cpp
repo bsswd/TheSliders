@@ -1,6 +1,5 @@
 ﻿// The Sliders Game. Made by Alex Sinkin (C)
 
-
 #include "Components/AttackComponent.h"
 #include "Engine/Engine.h"
 #include "PaperFlipbookComponent.h"
@@ -9,8 +8,8 @@
 #include "Characters/TS_PlayerCharacter.h"
 #include "Engine/World.h"
 #include "TimerManager.h"
-
-
+	
+DEFINE_LOG_CATEGORY_STATIC(LogAttackComponent, Log, All)
 
 UAttackComponent::UAttackComponent()
 {

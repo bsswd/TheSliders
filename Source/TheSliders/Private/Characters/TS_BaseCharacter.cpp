@@ -3,6 +3,7 @@
 #include "TheSliders/Public/Characters/TS_BaseCharacter.h"
 #include "PaperFlipbookComponent.h"
 #include "Components/AttackComponent.h"
+#include "Components/StatsComponent.h"
 #include "Core/CharacterStats.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -13,6 +14,7 @@ ATS_BaseCharacter::ATS_BaseCharacter()
 	PrimaryActorTick.bCanEverTick = false;
 		
 	AttackComponent = CreateDefaultSubobject<UAttackComponent>("AttackComponent");
+	StatsComponent = CreateDefaultSubobject<UStatsComponent>("StatsComponent");
 }
 
 /** BeginPlay and EndPlay **/
@@ -89,111 +91,4 @@ void ATS_BaseCharacter::PlayAttackAnimation()
 	{
 		GetSprite()->SetFlipbook(AttackFlipbook);
 	}
-}
-
-/** Stats **/
-
-void ATS_BaseCharacter::ApplyStats(const FName RowName)
-{
-	if (!StatsTable)
-	{
-		UE_LOG(LogBaseCharacter, Error, TEXT("DataTable not found!"));
-		return;
-	}
-   
-    FCharacterStats* FoundStats = StatsTable->FindRow<FCharacterStats>(RowName, TEXT("StatsLookup"));
-     
-    if (!FoundStats)
-    {
-    	UE_LOG(LogBaseCharacter, Error, TEXT("Stats not found!"));
-    	return;
-    }
-    
-    CharacterStats.Health = FoundStats->Health;
-	CharacterStats.Weight = FoundStats->Weight;
-	CharacterStats.Jump = FoundStats->Jump;
-	CharacterStats.Speed = FoundStats->Speed;
-	CharacterStats.Range = FoundStats->Range;
-	CharacterStats.Damage = FoundStats->Damage;
-	CharacterStats.AttackFrameIndex = FoundStats->AttackFrameIndex;
-	CharacterStats.IdleFlipbook = FoundStats->IdleFlipbook;
-	CharacterStats.WalkFlipbook = FoundStats->WalkFlipbook;
-	CharacterStats.JumpFlipbook = FoundStats->JumpFlipbook;
-	CharacterStats.AttackFlipbook = FoundStats->AttackFlipbook;
-	
-	/** Set flipbooks **/
-	
-	if(!CharacterStats.IdleFlipbook)
-	{
-		UE_LOG(LogBaseCharacter, Error, TEXT("IdleFlipbook is null"))
-		return;
-	}
-	IdleFlipbook = CharacterStats.IdleFlipbook;
-	
-	if(!CharacterStats.WalkFlipbook)
-	{
-		UE_LOG(LogBaseCharacter, Error, TEXT("WalkFlipbook is null"))
-		return;
-	}
-	WalkFlipbook = CharacterStats.WalkFlipbook;
-	
-	if(!CharacterStats.JumpFlipbook)
-	{
-		UE_LOG(LogBaseCharacter, Error, TEXT("JumpFlipbook is null"))
-		return;
-	}
-	JumpFlipbook = CharacterStats.JumpFlipbook;
-	
-	if(!CharacterStats.AttackFlipbook)
-	{
-		UE_LOG(LogBaseCharacter, Error, TEXT("AttackFlipbook is null"))
-		return;
-	}
-	AttackFlipbook = CharacterStats.AttackFlipbook;
-	
-	PrintDebugStats(RowName, CharacterStats, bPrintStatsDebug);
-    	
-	UE_LOG(LogBaseCharacter, Log, TEXT("Stats for %s applied successfully!"), *RowName.ToString());
-}
-
-void ATS_BaseCharacter::PrintDebugStats(const FName CharacterName, FCharacterStats Stats, const bool bPrint)
-{
-	if (!bPrint || !GEngine)
-	{
-		UE_LOG(LogBaseCharacter, Error, TEXT("Disable logging or error of GEngine"));
-		return;
-	}
-	
-	const UEnum* WeightEnum = StaticEnum<EWeight>();
-	const UEnum* JumpHeightEnum = StaticEnum<EJump>();
-	const UEnum* SpeedEnum = StaticEnum<ESpeed>();
-	const UEnum* RangeEnum = StaticEnum<ERange>();
-	const UEnum* DamageEnum = StaticEnum<EDamage>();
-	
-	const FString CharacterNameString = CharacterName.ToString();
-	const FString WeightString = WeightEnum ? WeightEnum->GetNameStringByValue(static_cast<int64>(Stats.Weight)) : TEXT("Unknown");
-	const FString JumpHeightString = JumpHeightEnum ? JumpHeightEnum->GetNameStringByValue(static_cast<int64>(Stats.Jump)) : TEXT("Unknown");
-	const FString SpeedString = SpeedEnum ? SpeedEnum->GetNameStringByValue(static_cast<int64>(Stats.Speed)) : TEXT("Unknown");
-	const FString RangeString = RangeEnum ? RangeEnum->GetNameStringByValue(static_cast<int64>(Stats.Range)) : TEXT("Unknown");
-	const FString DamageString = DamageEnum ? DamageEnum->GetNameStringByValue(static_cast<int64>(Stats.Damage)) : TEXT("Unknown");
-		
-	
-	const FString DebugString = FString::Printf(
-		TEXT("NAME: %s\nHEALTH: %.2f\nWEIGHT: %s\nJUMP HEIGHT: %s\nSPEED: %s\nRANGE: %s\nDAMAGE: %s\nATTACK INDEX: %d"),
-		*CharacterNameString,
-		Stats.Health,
-		*WeightString,
-		*JumpHeightString,
-		*SpeedString,
-		*RangeString,
-		*DamageString,
-		Stats.AttackFrameIndex
-	);
- 
-	GEngine->AddOnScreenDebugMessage(
-		-1,                  
-		5.f,                
-		FColor::Green,       
-		DebugString          
-	);
 }

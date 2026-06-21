@@ -93,25 +93,25 @@ void ATS_PlayerController::Attack()
 
 void ATS_PlayerController::SelectDoc()
 {
-	GetBaseCharacter()->ApplyStats(FName(TEXT("Doc")));
+	//GetBaseCharacter()->ApplyStats(FName(TEXT("Doc")));
 }
 
 void ATS_PlayerController::SelectBald()
 {
-	GetBaseCharacter()->ApplyStats(FName(TEXT("Bald")));
+	//GetBaseCharacter()->ApplyStats(FName(TEXT("Bald")));
 }
 
 void ATS_PlayerController::SelectLaw()
 {
-	GetBaseCharacter()->ApplyStats(FName(TEXT("Law")));	
+	//GetBaseCharacter()->ApplyStats(FName(TEXT("Law")));	
 }
 
 void ATS_PlayerController::SelectSazz()
 {
-	GetBaseCharacter()->ApplyStats(FName(TEXT("Sazz")));	
+	//GetBaseCharacter()->ApplyStats(FName(TEXT("Sazz")));	
 }
 
 void ATS_PlayerController::SelectJoka()
 {
-	GetBaseCharacter()->ApplyStats(FName(TEXT("Joka")));
+	//GetBaseCharacter()->ApplyStats(FName(TEXT("Joka")));
 }

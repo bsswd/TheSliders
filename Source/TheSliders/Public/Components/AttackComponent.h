@@ -10,9 +10,6 @@
 
 class UPaperFlipbookComponent;
 
-DEFINE_LOG_CATEGORY_STATIC(LogAttackComponent, Log, All)
-
-
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class THESLIDERS_API UAttackComponent : public UActorComponent
 {
@@ -26,6 +23,9 @@ public:
 	
 	UPROPERTY(VisibleAnywhere, Category = "TS|Attack|Settings")
 	UPaperFlipbookComponent* FlipbookComponent;
+	
+	UPROPERTY(VisibleAnywhere, Category = "TS|Attack|Settings")
+	float Damage = 0.f;
 	
 	UPROPERTY(VisibleAnywhere, Category = "TS|Attack|Settings")
 	int32 TargetAttackFrameIndex = 0;

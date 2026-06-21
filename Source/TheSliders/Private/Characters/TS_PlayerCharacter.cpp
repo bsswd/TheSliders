@@ -4,6 +4,7 @@
 #include "Camera/CameraComponent.h"
 #include "Components/AttackComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/StatsComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 
@@ -36,51 +37,11 @@ ATS_PlayerCharacter::ATS_PlayerCharacter()
 	SideCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	SideCamera->bUsePawnControlRotation = false;
 	SideCamera->SetProjectionMode(ECameraProjectionMode::Perspective);
-	SideCamera->FieldOfView = 10.f;
-	
-	SpeedMap.Add(ESpeed::Slow, 200.0f);
-	SpeedMap.Add(ESpeed::Middle, 600.0f);
-    SpeedMap.Add(ESpeed::Fast, 1000.0f);
-     
-	JumpMap.Add(EJump::None, 0.0f);
-	JumpMap.Add(EJump::Middle, 300.0f);
-	JumpMap.Add(EJump::High, 600.0f);
-	
-	AttackRangeMap.Add(ERange::Close, 150.f);
-	AttackRangeMap.Add(ERange::Middle, 300.f);
-	AttackRangeMap.Add(ERange::Far, 600.f);
-}
-
-void ATS_PlayerCharacter::ApplyStats(const FName RowName)
-{
-	Super::ApplyStats(RowName);
-	
-	if (UCharacterMovementComponent* MoveComp = GetCharacterMovement())
-	{
-		if (const float* SpeedValue = SpeedMap.Find(CharacterStats.Speed))
-		{
-			MoveComp->MaxWalkSpeed = *SpeedValue;
-		}
-		
-		if (const float* JumpValue = JumpMap.Find(CharacterStats.Jump))
-		{
-			MoveComp->JumpZVelocity = *JumpValue;
-		}
-	}
-	
-	if (AttackComponent)
-	{
-		if (const float* RangeValue = AttackRangeMap.Find(CharacterStats.Range))
-		{
-			AttackComponent->Range = *RangeValue;
-		}
-		
-		AttackComponent->TargetAttackFrameIndex = CharacterStats.AttackFrameIndex;
-	}
+	SideCamera->FieldOfView = 10.f;	
 }
 
 void ATS_PlayerCharacter::BeginPlay()
 {
-	Super::BeginPlay();
-	ApplyStats(FName(TEXT("Doc")));
+	Super::BeginPlay();	
+	StatsComponent->ApplyStats(FName(TEXT("Doc")));
 }

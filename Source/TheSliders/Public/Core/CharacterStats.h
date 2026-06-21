@@ -9,46 +9,11 @@
 class UPaperFlipbook;
 
 UENUM(BlueprintType)
-enum class EWeight : uint8
+enum class EWeight : uint8 
 {
-	Light  UMETA(DisplayName = "Light"),
-	Middle UMETA(DisplayName = "Middle"),
-	Heavy  UMETA(DisplayName = "Heavy")
-};
-
-
-UENUM(BlueprintType)
-enum class EJump : uint8
-{
-	None   UMETA(DisplayName = "None"),
-	Middle UMETA(DisplayName = "Middle"),
-	High   UMETA(DisplayName = "High")
-};
- 
-
-UENUM(BlueprintType)
-enum class ESpeed : uint8
-{
-	Slow   UMETA(DisplayName = "Slow"),
-	Middle UMETA(DisplayName = "Middle"),
-	Fast   UMETA(DisplayName = "Fast")
-};
- 
-
-UENUM(BlueprintType)
-enum class ERange : uint8
-{
-	Close  UMETA(DisplayName = "Close"),
-	Middle UMETA(DisplayName = "Middle"),
-	Far    UMETA(DisplayName = "Far")
-};
-
-UENUM(BlueprintType)
-enum class EDamage : uint8
-{
-	Light  UMETA(DisplayName = "Light"),
-	Middle UMETA(DisplayName = "Middle"),
-	Strong UMETA(DisplayName = "Strong")
+	Light  UMETA(DisplayName = "Light"), // Платформа поднимается, струна выстрелиивает (если была натянута)
+	Middle UMETA(DisplayName = "Middle"), // Платформа и струна не реагируют
+	Heavy  UMETA(DisplayName = "Heavy") // Платформа опускается, струна натягивается
 };
  
 
@@ -60,21 +25,21 @@ struct FCharacterStats : public FTableRowBase
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats")
 	float Health = 100.0f;
- 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats|Movement")
-	ESpeed Speed = ESpeed::Middle;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats|Movement")
-	EJump Jump = EJump::Middle;
- 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats|Movement")
 	EWeight Weight = EWeight::Middle;
+ 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats|Movement")
+	float MovementSpeed = 300.f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats|Movement")
+	float JumpHeight = 300.f;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats|Attack")
-	ERange Range = ERange::Middle;
+	float AttackRange = 300.f;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats|Attack")
-	EDamage Damage = EDamage::Middle;
+	float AttackDamage = 10.f;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TS|Stats|Attack")
 	int32 AttackFrameIndex = 0;

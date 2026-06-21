@@ -7,6 +7,7 @@
 #include "Core/CharacterStats.h"
 #include "TS_BaseCharacter.generated.h"
 
+class UStatsComponent;
 class UAttackComponent;
 class UBoxComponent;
 class UPaperFlipbook;
@@ -26,7 +27,12 @@ public:
 	bool GetFacingRight() const {return bIsFacingRight;}
 	
 	virtual void PlayAttackAnimation();
-	virtual void ApplyStats(FName RowName);
+	
+	void SetIdleFlipbook(UPaperFlipbook* InFlipbook) {IdleFlipbook = InFlipbook ; }
+	void SetWalkFlipbook(UPaperFlipbook* InFlipbook) {WalkFlipbook = InFlipbook ; }
+	void SetJumpFlipbook(UPaperFlipbook* InFlipbook) {JumpFlipbook = InFlipbook ; }
+	void SetAttackFlipbook(UPaperFlipbook* InFlipbook) {AttackFlipbook = InFlipbook ; }
+	
 	
 protected:
 
@@ -34,6 +40,9 @@ protected:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TS|Components")
 	TObjectPtr<UAttackComponent> AttackComponent;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TS|Components")
+	TObjectPtr<UStatsComponent> StatsComponent;
 
 	/** Flipbooks **/
 	
@@ -57,20 +66,7 @@ protected:
  
 	UPROPERTY(EditAnywhere, Category="TS|Animation")
 	float RunSpeedThreshold = 1.0f;
-		
-	
-	/** Stats **/
-	
-	/** PROPERTIES **/
-	
-	UPROPERTY(EditAnywhere, Category = "TS|Data")
-    UDataTable* StatsTable;
-    
-    UPROPERTY(VisibleAnywhere, Category = "TS|Data")
-    FCharacterStats CharacterStats;
-	
-	UPROPERTY(EditAnywhere, Category = "TS|Data")
-	bool bPrintStatsDebug = false;
+
 	
 	/** FUNCTIONS **/	
 	
@@ -96,5 +92,5 @@ private:
 	/** FUNCTIONS **/
 	
 	void CheckAndUpdateMovementAnimation();	
-	static void PrintDebugStats(FName CharacterName, FCharacterStats Stats, const bool bPrint);
+	
 };

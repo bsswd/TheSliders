@@ -20,23 +20,12 @@ public:
 	
 	/** PROPERTIES **/
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TS|Movement")
-    TMap<ESpeed, float> SpeedMap;
-        
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TS|Movement")
-    TMap<EJump, float> JumpMap;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TS|Movement")
-	TMap<ERange, float> AttackRangeMap;
-	
-	
 protected:
 	
 	/** FUNCTIONS **/
 	
 	FORCEINLINE int32 GetLivesCount() {return LivesCount;}
-
-	virtual void ApplyStats(FName RowName) override;
+	
 	virtual void BeginPlay() override;
 	
 	
