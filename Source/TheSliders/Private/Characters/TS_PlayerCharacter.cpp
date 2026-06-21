@@ -25,7 +25,7 @@ ATS_PlayerCharacter::ATS_PlayerCharacter()
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>("CameraBoom");
 	CameraBoom->SetupAttachment(GetRootComponent());
 	CameraBoom->TargetArmLength = 6000.f;
-	CameraBoom->SetRelativeLocation(FVector(0.f, 0.f, 0.f));
+	CameraBoom->SetRelativeLocation(FVector(0.f, 0.f, 120.f));
 	CameraBoom->bUsePawnControlRotation = false;
 	CameraBoom->bInheritYaw = false;
 	CameraBoom->bEnableCameraLag = true;
@@ -43,8 +43,8 @@ ATS_PlayerCharacter::ATS_PlayerCharacter()
     SpeedMap.Add(ESpeed::Fast, 1000.0f);
      
 	JumpMap.Add(EJump::None, 0.0f);
-	JumpMap.Add(EJump::Middle, 600.0f);
-	JumpMap.Add(EJump::High, 1200.0f);
+	JumpMap.Add(EJump::Middle, 300.0f);
+	JumpMap.Add(EJump::High, 600.0f);
 	
 	AttackRangeMap.Add(ERange::Close, 150.f);
 	AttackRangeMap.Add(ERange::Middle, 300.f);
